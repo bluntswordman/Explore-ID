@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
-import { Collapse } from 'bootstrap';
-import mapboxgl from 'mapbox-gl';
 import { useNavigate } from 'react-router-dom'
+import { Collapse } from 'bootstrap';
+import mapboxgl, { CanvasSource } from 'mapbox-gl';
 import axios from 'axios';
 import './Location.css';
 
@@ -19,9 +19,7 @@ function Location() {
   const [author, setAuthor] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-
-  const [toggle, setToggle] = useState(false)
-  const collapseRef = useRef()
+  const [location, setLocation] = useState([]);
 
   const navigate = useNavigate();
   
@@ -31,88 +29,106 @@ function Location() {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
-      zoom: zoom
-    });
-  });
-  
-  useEffect(() => {
-    if (!map.current) return;
-      map.current.on('move', () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
-      setZoom(map.current.getZoom().toFixed(2));
+      zoom: zoom,
     });
   });
 
   useEffect(() => {
-    const myCollapse = collapseRef.current;
-    const bsCollapse = new Collapse(myCollapse, {toggle: false});
-    toggle ? bsCollapse.show() : bsCollapse.hide();
+    map.current.on('load', () => {
+      map.current.resize();
+      map.current.addControl(new mapboxgl.NavigationControl());
+      map.current.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      }));
+      map.current.addControl(new mapboxgl.FullscreenControl());
+      map.current.addControl(new mapboxgl.ScaleControl());
+      map.current.addControl(new mapboxgl.Geocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+      }));
+      map.current.addControl(new mapboxgl.Marker({
+        draggable: true,
+        color: '#ff0000',
+        drag: (e) => {
+          setLng(e.target._lngLat.lng);
+          setLat(e.target._lngLat.lat);
+        }
+      }).setLngLat([lng, lat]).addTo(map.current));
+    });
+    
     if (!map.current) return;
     map.current.on('click', (e) => {
-      const lng = e.lngLat.lng;
-      const lat = e.lngLat.lat;
-      setToggle(!toggle);
-      setLng(lng);
-      setLat(lat);
-      console.log(lng, lat);
+      setLng(e.lngLat.lng);
+      setLat(e.lngLat.lat);
+      return console.log(e.lngLat.lng, e.lngLat.lat);
     });
-  });
 
+    location.map(loc => {
+      const el = document.createElement('div');
+      el.className = 'marker';
+      new mapboxgl.Marker(el)
+        .setLngLat([loc.lng, loc.lat])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).)
+        .addTo(map.current)
+
+      el.addEventListener('click', () => {
+        const canvas = document.createElement('div');
+        canvas.className = 'canvas';
+        canvas.innerHTML = `
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${loc.title}</h5>
+              <p class="card-text">${loc.description}</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        `;  // eslint-disable-line
+        map.current.getCanvas().style.cursor = 'default';
+        new mapboxgl.Popup()
+          .setLngLat([loc.lng, loc.lat])
+          .setDOMContent(canvas)
+          .addTo(map.current);
+      });
+    });
+  }, [location]);
+  
   useEffect(() => {
-    createLocation();
-  }, []);
-
-  const createLocation = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:5000/v1/location/', {
-        author: author,
-        title: title,
-        description: description,
-        lat: lat,
-        lng: lng
-      })
-      navigate('/location')
-    } catch (err) {
-      console.error(err)
+    const createLocation = async (e) => {
+      e.preventDefault();
+      try {
+        await axios.post('http://localhost:5000/v1/location/', {
+          author: author,
+          title: title,
+          description: description,
+          lat: lat,
+          lng: lng
+        })
+        navigate('/location')
+      } catch (err) {
+        console.error(err)
+      }
     }
-  }
+    const getLocation = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/v1/location/');
+        setLocation(res.data);
+        // console.log(res.data);
+      } catch (err) {
+        console.error(err)
+      }
+    }
 
+    createLocation(); 
+    getLocation();
+  }, []);
   
   return (
     <>
       <div>
-        <div className="collapse" ref={collapseRef}>
-            This is the toggle-able content!
-        </div>
-        <div className="sidebar">
-          Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-        </div>
         <div ref={mapContainer} className="map-container"/>
-      <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" ref={collapseRef}>
-        <div className="offcanvas-header">
-          <h3 className="offcanvas-title" id="offcanvasExampleLabel">Buat Lokasi wisata Baru</h3>
-          <button type="button" className="btn-close" onClick={() => setToggle(toggle => !toggle)}></button>
-        </div>
-        <div className="offcanvas-body">
-          <form onSubmit={createLocation}>
-            <div className="form-group">
-              <label for="author">Author</label>
-              <input type="text" className="form-control" id="author" placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)} autoComplete="off"/>
-            </div>
-            <div className="form-group">
-              <label for="title">Title</label>
-              <input type="text" className="form-control" id="title" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} autoComplete="off"/>
-            </div>
-            <div className="form-group">
-              <label for="description">Description</label>
-              <input type="text" className="form-control" id="description" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} autoComplete="off"/>
-            </div>
-            <button type="submit" className="btn btn-primary" onClick={() => setToggle(toggle => !toggle)}>Submit</button>
-          </form>
-        </div>
-      </div>
       </div>
     </>
   );
