@@ -11,7 +11,7 @@ function Hero() {
             <p className="subtitle text-white fw-semibold">
               Explore Indonesia's tourist attractions, culture, and history.
             </p>
-            <button className="btn btn-warning fw-bold text-white">Jelajah</button>
+            <a href="/location" className="btn btn-warning fw-bold text-white">Jelajah</a>
           </div>
         </div>
       </div>

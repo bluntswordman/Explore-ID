@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { Navigation } from '../../components/index.js';
 import { Collapse } from 'bootstrap';
 import mapboxgl from 'mapbox-gl';
 import axios from 'axios';
@@ -126,7 +127,8 @@ function Location() {
   }, []);
   
   return (
-    <>
+    <> 
+      <Navigation />
       <div>
         <div ref={mapContainer} className="map-container"/>
       </div>
