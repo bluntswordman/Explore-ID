@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from "./Home/Home";
-import Location from "./Location/Location";
-import './App.css';
+import { Home, Location, Login, Register } from './pages/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import './App.css';
 
 function App() {
   return (
@@ -13,6 +12,8 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home/>}/>
             <Route path="/location" element={<Location/>}/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/login" element={<Login/>}/>
           </Routes>
       </Router>
     </div>
