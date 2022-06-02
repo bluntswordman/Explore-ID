@@ -1,8 +1,15 @@
 import React from 'react'
+import { Navigation, Hero, Footer, Content } from '../../components/index.js'
+
 
 function Home() {
   return (
-    <div>Home</div>
+    <>
+      <Navigation />
+      <Hero />
+      <Content />
+      <Footer />
+    </>
   )
 }
 

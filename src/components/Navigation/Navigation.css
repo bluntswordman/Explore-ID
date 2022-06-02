@@ -1,0 +1,5 @@
+.title {
+  font-size: 1.7rem !important;
+  font-weight: bold;
+  color: var(--bs-teal) !important;
+}

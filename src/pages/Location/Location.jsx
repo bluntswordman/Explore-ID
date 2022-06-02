@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Collapse } from 'bootstrap';
-import mapboxgl, { CanvasSource } from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import axios from 'axios';
 import './Location.css';
 
@@ -71,7 +71,7 @@ function Location() {
       el.className = 'marker';
       new mapboxgl.Marker(el)
         .setLngLat([loc.lng, loc.lat])
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }))
         .addTo(map.current)
 
       el.addEventListener('click', () => {

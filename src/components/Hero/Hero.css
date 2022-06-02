@@ -1,0 +1,41 @@
+.bg-image {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../../assets/img/hero-sm.jpg');
+  margin-top: -67px;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .bg-image {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../../assets/img/hero-md.jpg');
+    margin-top: -67px;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .bg-image {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../../assets/img/hero-lg.jpg');
+    margin-top: -67px;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .bg-image {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../../assets/img/hero.jpg');
+    margin-top: -66.5px;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+}
