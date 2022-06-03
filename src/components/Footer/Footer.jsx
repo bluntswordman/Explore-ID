@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
 
-function Footer() {
+const Footer = () => {
   return (
     <>
       <footer className="footer text-muted mt-5 pb-n3 ">

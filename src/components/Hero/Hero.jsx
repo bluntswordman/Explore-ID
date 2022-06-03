@@ -1,7 +1,8 @@
 import React from 'react';
 import './/Hero.css';
 
-function Hero() {
+
+const Hero = () => {
   return (
     <section className="bg-image">
       <div className="container pt-5 text-start">

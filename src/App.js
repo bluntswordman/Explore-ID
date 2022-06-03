@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Home, Location, Login, Register } from './pages/index';
+import { Home, Location, Login, Register, Dashboard, UpdateUsers } from './pages/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './App.css';
@@ -14,6 +14,8 @@ function App() {
             <Route path="/location" element={<Location/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/update" element={<UpdateUsers/>}/>
           </Routes>
       </Router>
     </div>

@@ -1,8 +1,12 @@
 import React from 'react'
+import { Navigation, LoginForm } from '../../components/index'
 
-function Login() {
+const Login = () => {
   return (
-    <div>Login</div>
+    <>
+      <Navigation />
+      <LoginForm />
+    </>
   )
 }
 

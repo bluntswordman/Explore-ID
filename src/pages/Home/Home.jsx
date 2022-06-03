@@ -1,8 +1,7 @@
 import React from 'react'
 import { Navigation, Hero, Footer, Content } from '../../components/index.js'
 
-
-function Home() {
+const Home = () => {
   return (
     <>
       <Navigation />

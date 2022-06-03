@@ -1,8 +1,12 @@
 import React from 'react'
+import { Navigation, RegisterForm } from '../../components/index'
 
-function Register() {
+const Register = () => {
   return (
-    <div>Register</div>
+    <>
+      <Navigation />
+      <RegisterForm />
+    </>
   )
 }
 
