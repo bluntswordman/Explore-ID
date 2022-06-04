@@ -72,27 +72,32 @@ function Location() {
       el.className = 'marker';
       new mapboxgl.Marker(el)
         .setLngLat([loc.lng, loc.lat])
-        .setPopup(new mapboxgl.Popup({ offset: 25 }))
-        .addTo(map.current)
+        .setPopup(new mapboxgl.Popup({ closeOnClick: true }, el)
+          .setHTML(`
+            <img src="https://images.unsplash.com/photo-1528931345244-228afd762769?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="${loc.title}" class="image-popup"/>
+            <h3 >${loc.title}</h3>
+            <p>${loc.description}</p>
+            <button class="btn btn-primary" onClick="window.location.href='/location/${loc.id}'">View</button>`))
+        .addTo(map.current);
 
-      el.addEventListener('click', () => {
-        const canvas = document.createElement('div');
-        canvas.className = 'canvas';
-        canvas.innerHTML = `
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">${loc.title}</h5>
-              <p class="card-text">${loc.description}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        `;  // eslint-disable-line
-        map.current.getCanvas().style.cursor = 'default';
-        new mapboxgl.Popup()
-          .setLngLat([loc.lng, loc.lat])
-          .setDOMContent(canvas)
-          .addTo(map.current);
-      });
+      // el.addEventListener('click', () => {
+      //   const canvas = document.createElement('div');
+      //   canvas.className = 'canvas';
+      //   canvas.innerHTML = `
+      //     <div class="card">
+      //       <div class="card-body">
+      //         <h5 class="card-title">${loc.title}</h5>
+      //         <p class="card-text">${loc.description}</p>
+      //         <a href="#" class="btn btn-primary">Go somewhere</a>
+      //       </div>
+      //     </div>
+      //   `;  // eslint-disable-line
+      //   map.current.getCanvas().style.cursor = 'default';
+      //   new mapboxgl.Popup()
+      //     .setLngLat([loc.lng, loc.lat])
+      //     .setDOMContent(canvas)
+      //     .addTo(map.current);
+      // });
     });
   }, [location]);
   

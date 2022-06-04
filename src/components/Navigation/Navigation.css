@@ -1,5 +1,18 @@
-.title {
+.title-nav {
   font-size: 1.7rem !important;
   font-weight: bold;
   color: var(--bs-teal) !important;
+}
+
+.btn-core {
+  background-color: #20c997 !important;
+  color: white !important;
+  transition: 0.5s;
+  border-color: var(--bs-teal) !important;
+}
+
+.btn-core:hover {
+  background-color: #79dbbe !important;
+  transition: 0.5s;
+  color: white !important;
 }

@@ -7,6 +7,24 @@
   overflow: hidden;
 }
 
+.main-title {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 70px 0 5px;
+}
+
+.main-title .title-flik{
+  color: #fff;
+  transition: 0.7s;
+}
+
+.main-title .title-flik:hover {
+  color: #FF0000;
+  transition: 0.7s;
+}
+
 @media screen and (min-width: 768px) {
   .bg-image {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../../assets/img/hero-md.jpg');

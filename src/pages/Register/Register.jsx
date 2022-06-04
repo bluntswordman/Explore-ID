@@ -1,10 +1,9 @@
 import React from 'react'
-import { Navigation, RegisterForm } from '../../components/index'
+import { RegisterForm } from '../../components/index'
 
 const Register = () => {
   return (
     <>
-      <Navigation />
       <RegisterForm />
     </>
   )

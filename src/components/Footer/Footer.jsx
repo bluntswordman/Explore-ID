@@ -1,4 +1,5 @@
 import React from 'react'
+import './Footer.css'
 import { Icon } from '@iconify/react'
 
 const Footer = () => {
@@ -9,14 +10,11 @@ const Footer = () => {
           <div className="row">
             <div className="col-md-2">
               <h3 className="text-start mx-3">
-                <a href="/" className="text-decoration-none title">Explore ID</a>
+                <a href="/" className="text-decoration-none title-footer">Explore ID</a>
               </h3>
             </div>
           </div>
           <div className="row justify-content-between">
-            <div className="col-sm-3">
-              <p className="text-start mx-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor</p>
-            </div>
             <div className="col d-flex flex-row justify-content-end align-items-end mb-1 ">
               <a href="/" className="px-1 text-decoration-none text-dark fw-bolder">Tentang Kami</a>
               <span className="px-1 fw-bold">|</span>
