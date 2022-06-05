@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react'
-import { img1, img2, img3, img4, img5 } from '../../assets/content/index.js'
+import { img1, img2, img3, img4, img5 } from '../../assets/index.js'
 import axios from 'axios'
 import './Content.css'
 
