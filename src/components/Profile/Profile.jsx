@@ -28,6 +28,7 @@ const Profile =  () => {
             </div>
           </div>
         </div>
+        
       </div>
       <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
@@ -49,7 +50,6 @@ const Profile =  () => {
               </form>
             </div>
               <div className="modal-footer">
-                {/* <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button> */}
                 <button type="button" className="btn btn-primary">Submit</button>
               </div>
             </div>

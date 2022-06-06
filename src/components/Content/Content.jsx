@@ -14,7 +14,6 @@ const Content = () =>{
     }
     fetchData()
   }, [])
-  // console.log(data)
 
   return (
     <>
@@ -37,31 +36,31 @@ const Content = () =>{
           ))}
         </div> */}
         <div className="card-group my-4">
-        <div className="card border-0">
-          <img src={img2} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
-          <div className="card-body border rounded-3 mx-1 shadow-sm">
-            <h5 className="card-title">Pasar 16 Ilir</h5>
-            <p className="card-text">Hiya HIya</p>
-            <p className="card-text"><small className="text-muted">Kitou Akari</small></p>
+          <div className="card border-0">
+            <img src={img2} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
+            <div className="card-body border rounded-3 mx-1 shadow-sm">
+              <h5 className="card-title">Pasar 16 Ilir</h5>
+              <p className="card-text">Hiya HIya</p>
+              <p className="card-text"><small className="text-muted">Kitou Akari</small></p>
+            </div>
+          </div>
+          <div className="card border-0">
+            <img src={img1} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
+            <div className="card-body border rounded-3 mx-1 shadow-sm">
+              <h5 className="card-title">Sungai Sekanak</h5>
+              <p className="card-text">Hiya HIya</p>
+              <p className="card-text"><small className="text-muted">Kitou Akari</small></p>
+            </div>
+          </div>
+          <div className="card border-0">
+            <img src={img3} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
+            <div className="card-body border rounded-3 mx-1 shadow-sm ">
+              <h5 className="card-title">Pulau Kemaro</h5>
+              <p className="card-text">Hiya HIya</p>
+              <p className="card-text"><small className="text-muted">Kitou Akari</small></p>
+            </div>
           </div>
         </div>
-        <div className="card border-0">
-          <img src={img1} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
-          <div className="card-body border rounded-3 mx-1 shadow-sm">
-            <h5 className="card-title">Sungai Sekanak</h5>
-            <p className="card-text">Hiya HIya</p>
-            <p className="card-text"><small className="text-muted">Kitou Akari</small></p>
-          </div>
-        </div>
-        <div className="card border-0">
-          <img src={img3} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
-          <div className="card-body border rounded-3 mx-1 shadow-sm ">
-            <h5 className="card-title">Pulau Kemaro</h5>
-            <p className="card-text">Hiya HIya</p>
-            <p className="card-text"><small className="text-muted">Kitou Akari</small></p>
-          </div>
-        </div>
-      </div>
       </div>
     </>
   )
