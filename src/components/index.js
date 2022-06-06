@@ -6,6 +6,7 @@ import LoginForm from "./Form/LoginForm";
 import RegisterForm from "./Form/RegisterForm";
 import UpdateDataForm from "./Form/UpdateDataForm";
 import Profile from "./Profile/Profile";
+import Location from "./Post/Location";
 
 export { 
   Navigation,
@@ -15,5 +16,6 @@ export {
   LoginForm,
   RegisterForm,
   UpdateDataForm,
-  Profile
+  Profile,
+  Location
 };

@@ -13,7 +13,7 @@ export const useRefreshToken = () => {
 
   const refreshToken = async() => {
     try {
-      const response = await axios.get('http://localhost:5000/v1/user/token/access');
+      const response = await axios.get('http://localhost:5000/v1/token/access');
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
       setUserId(decoded.userId);
@@ -23,7 +23,7 @@ export const useRefreshToken = () => {
       if (error.response.status === 401) {
         return window.location.href = "/login";
       }
-      return window.location.href = "/login";
+      // return window.location.href = "/login";
     }
   }
 
@@ -32,7 +32,7 @@ export const useRefreshToken = () => {
   accessJWT.interceptors.request.use(async(config) => {
     const currentDate = new Date();
     if (expired * 1000 < currentDate.getTime()) {
-      const response = await axios.get('http://localhost:5000/v1/user/token/access');
+      const response = await axios.get('http://localhost:5000/v1/token/access');
       config.headers.Authorization = `Bearer ${response.data.accessToken}`;
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);

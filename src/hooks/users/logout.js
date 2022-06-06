@@ -17,9 +17,9 @@ export const useLogOutUser = () => {
     } catch (error) {
       console.log(error.response.data.msg);
       if (error.response.status === 401) {
-        return window.location.href = "/login";
+        // return window.location.href = "/login";
       }
-      return window.location.href = "/login";
+      // return window.location.href = "/login";
     }
   }
 

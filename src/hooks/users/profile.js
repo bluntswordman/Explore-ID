@@ -19,7 +19,6 @@ export const useProfile = () => {
     }
     
     try {
-      // console.log(userId);
       const response = await accessJWT.get(`http://localhost:5000/v1/user/${id}`, config);
       // console.log(userId);
       // console.log(response.data);
