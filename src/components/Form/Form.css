@@ -19,6 +19,7 @@
 
 .text-header a {
   color: var(--bs-teal) !important;
+  text-decoration: none;
 }
 
 .text-description {
@@ -45,29 +46,34 @@
   transition: 0.6s;
 }
 
-.input-form {
-  width: 260px;
-  height: 40px;
+.form-local {
+  display: grid;
+  place-items: end;
+}
 
-  border: none;
-  background: rgba(165, 160, 174, 0.81);
-  box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+.input-form {
+  width: 260px !important;
+  height: 40px !important;
+
+  border: none !important;
+  background: rgba(165, 160, 174, 0.81) !important;
+  box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 10px !important;
 }
 
 .input-form::-webkit-input-placeholder {
-  color: #fff;
-  font-style: italic;
-  font-size: 13px;
-  padding-left: 7px;
+  color: #fff !important;
+  font-style: italic !important;
+  font-size: 13px !important;
 }
 
 .button-form {
+  border: none !important;
   width: 179px;
   height: 40px;
   font-weight: bold;
   color: #fff;
-  background: #246D55;
+  background: #246D55 !important;
   box-shadow: 1px 5px 5px 2px rgba(0, 0, 0, 0.25);
   border-radius: 10px !important;
   border: none;
@@ -75,7 +81,7 @@
 }
 
 .button-form:hover{
-  background: #77b492;
+  background: #77b492 !important;
   color: #141414;
   transition: 0.6s;
 }

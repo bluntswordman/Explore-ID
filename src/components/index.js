@@ -4,9 +4,9 @@ import Footer from "./Footer/Footer";
 import Content from "./Content/Content";
 import LoginForm from "./Form/LoginForm";
 import RegisterForm from "./Form/RegisterForm";
-import UpdateDataForm from "./Form/UpdateDataForm";
 import Profile from "./Profile/Profile";
 import Location from "./Post/Location";
+import MapPins from "./Map/MapPins";
 
 export { 
   Navigation,
@@ -15,7 +15,7 @@ export {
   Footer,
   LoginForm,
   RegisterForm,
-  UpdateDataForm,
   Profile,
-  Location
+  Location,
+  MapPins
 };

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { loginUser } from '../../hooks/users/login';
 import './Form.css';
 
@@ -10,46 +11,37 @@ const LoginForm = () => {
     e.preventDefault();
     
     const user = { username, password };
-
     loginUser(user)
   };
   
   return (
     <div className="bg-form">
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <h2 className='text-header'><a href="/" className="text-decoration-none">Explore ID</a></h2>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
+      <Container>
+        <Row>
+          <Col>
+            <h2 className='text-header'><a href="/">Explore ID</a></h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <p className="text-description">Bagikan moment tempat wisata mu!</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <p className='text-question'>Belum memiliki akun ? <a href="/register">Daftar disini</a></p>
-          </div>
-        </div>
-        <form onSubmit={ handleSubmit }>
-          <div className="row pb-3">
-            <div className="col">
-              <input type="text" placeholder='Username' className="input-form" value={username} onChange={(e) => setUsername(e.target.value)}/>
-            </div>
-          </div>
-          <div className="row pb-3">
-            <div className="col">
-              <input type="password" placeholder='Password' className="input-form" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            </div>
-          </div>
-          <div className="row pb-3">
-            <div className="col">
-              <button className='button-form'>Masuk</button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </Col>
+        </Row>
+        <Form onSubmit={ handleSubmit } className='form-local'>
+          <Form.Group className="pb-3" controlId="formBasicUsername">
+            <Form.Control type="text" placeholder="Enter Username" autoComplete='off' className="input-form" value={username} onChange={(e) => setUsername(e.target.value)}/>
+          </Form.Group>
+          <Form.Group className="pb-3" controlId="formBasicPassword">
+            <Form.Control type="password" placeholder="Enter Password" className="input-form" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          </Form.Group>
+          <Button type="submit" className="button-form">Masuk</Button>
+        </Form>
+      </Container>
     </div>
   );
 };

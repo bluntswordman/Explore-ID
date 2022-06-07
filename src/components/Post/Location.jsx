@@ -1,39 +1,36 @@
-import React from 'react'
-import { img1, img2, img3, img4, img5 } from '../../assets/index.js'
-
+import React from 'react';
+import { Container, CardGroup, Card} from "react-bootstrap";
+import { img1, img4, img5 } from '../../assets/index.js'
 
 const Location = () => {
-  const image = {img1, img2, img3, img4, img5};
-  const randomImage = image[Math.floor(Math.random() * image.length)];
-
   return (
-    <div className='container my-5'>
+    <Container className='my-5'>
       <h2 className='text-start'>Postingan Saya</h2>
-      <div className="card-group my-4">
-        <div className="card border-0">
-          <img src={img5} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
-          <div className="card-body border rounded-3 mx-1 shadow-sm">
-            <h5 className="card-title">Park Sako</h5>
-            <p className="card-text">Hiya HIya</p>
-          </div>
-        </div>
-        <div className="card border-0">
-          <img src={img1} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
-          <div className="card-body border rounded-3 mx-1 shadow-sm">
-            <h5 className="card-title">Park Sako</h5>
-            <p className="card-text">Hiya HIya</p>
-          </div>
-        </div>
-        <div className="card border-0">
-          <img src={img4} className="card-img-top p-1 rounded-3 img-size" alt="..."/>
-          <div className="card-body border rounded-3 mx-1 shadow-sm ">
-            <h5 className="card-title">Park Sako</h5>
-            <p className="card-text">Hiya HIya</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      <CardGroup className="my-4">
+        <Card className="border-0">
+          <Card.Img variant="top" className="p-1 rounded-3 img-size" src={img5} alt="..."/>
+          <Card.Body className="border rounded-3 mx-1 shadow-sm">
+            <Card.Title>Park Sako</Card.Title>
+            <Card.Text>Hiya HIya</Card.Text>
+          </Card.Body>
+        </Card>
+        <Card className="border-0">
+          <Card.Img variant="top" className="p-1 rounded-3 img-size" src={img1} alt="..."/>
+          <Card.Body className="border rounded-3 mx-1 shadow-sm">
+            <Card.Title>Park Sako</Card.Title>
+            <Card.Text>Hiya HIya</Card.Text>
+          </Card.Body>
+        </Card>
+        <Card className="border-0">
+          <Card.Img variant="top" className="p-1 rounded-3 img-size" src={img4} alt="..."/>
+          <Card.Body className="border rounded-3 mx-1 shadow-sm ">
+            <Card.Title>Park Sako</Card.Title>
+            <Card.Text>Hiya HIya</Card.Text>
+          </Card.Body>
+        </Card>
+      </CardGroup>
+    </Container>
   )
-}
+};
 
-export default Location
+export default Location;

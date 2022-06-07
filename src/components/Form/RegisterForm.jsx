@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 import { registerUser } from '../../hooks/users/register';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './Form.css';
 
 const RegisterForm = () => {
@@ -11,62 +11,48 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = { username, name, password, confirmPassword };
     
     if (password !== confirmPassword) {
       return alert('Passwords do not match');
     }
-
-    const user = { username, name, password, confirmPassword };
-
     registerUser(user)
   };
 
   return (
     <div className="bg-form">
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <h2 className='text-header'><a href="/" className="text-decoration-none">Explore ID</a></h2>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
+      <Container>
+        <Row>
+          <Col>
+            <h2 className='text-header'><a href="/">Explore ID</a></h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <p className="text-description">Bagikan moment tempat wisata mu!</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <p className='text-question'>Sudah memiliki akun ? <a href="/login">Masuk disini</a></p>
-          </div>
-        </div>
-        <form onSubmit={ handleSubmit }>
-          <div className="row pb-3">
-            <div className="col">
-              <input type="text" placeholder='Ketikan username disini' className="input-form" value={username} onChange={(e) => setUsername(e.target.value)}/>
-            </div>
-          </div>
-          <div className="row pb-3">
-            <div className="col">
-              <input type="text" placeholder='Ketikan nama disini' className="input-form" value={name} onChange={(e) => setName(e.target.value)}/>
-            </div>
-          </div>
-          <div className="row pb-3">
-            <div className="col">
-              <input type="password" placeholder='Password' className="input-form" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            </div>
-          </div>
-          <div className="row pb-3">
-            <div className="col">
-              <input type="password" placeholder='Konfirmasi Password' className="input-form" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-            </div>
-          </div>
-          <div className="row pb-3">
-            <div className="col">
-              <button className='button-form'>Buat Akun</button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </Col>
+        </Row>
+        <Form onSubmit={ handleSubmit } className='form-local'>
+          <Form.Group className="pb-3" controlId="formBasicUsername">
+            <Form.Control type="text" placeholder="Enter Username" autoComplete='off' className="input-form" value={username} onChange={(e) => setUsername(e.target.value)}/>
+          </Form.Group>
+          <Form.Group className="pb-3" controlId="formBasicName">
+            <Form.Control type="text" placeholder="Enter Name" autoComplete='off' className="input-form" value={name} onChange={(e) => setName(e.target.value)}/>
+          </Form.Group>
+          <Form.Group className="pb-3" controlId="formBasicPassword">
+            <Form.Control type="password" placeholder="Enter Password" className="input-form" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          </Form.Group>
+          <Form.Group className="pb-3" controlId="formBasicConfirmPassword">
+            <Form.Control type="password" placeholder="Confirm Password" className="input-form" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+          </Form.Group>
+          <Button type="submit" className="button-form">Daftar</Button>
+        </Form>
+      </Container>
     </div>
   );
 };

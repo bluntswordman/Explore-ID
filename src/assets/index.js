@@ -4,6 +4,8 @@ import img3 from './content/content-3.jpg';
 import img4 from './content/content-4.jpg';
 import img5 from './content/content-5.jpg';
 import defaultProfile from './content/default-user.jpg';
+import pinLocation from './icon/pin.png';
+import addImage from './icon/add-photo.png';
 
 export {
   img1,
@@ -12,4 +14,6 @@ export {
   img4,
   img5,
   defaultProfile,
+  pinLocation,
+  addImage
 }
