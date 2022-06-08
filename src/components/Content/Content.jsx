@@ -15,7 +15,7 @@ const Content = () =>{
         <Card className="border-0">
           <Card.Img variant="top" className="p-1 rounded-3 img-size" src={img2} alt="..."/>
           <Card.Body className="border rounded-3 mx-1 shadow-sm">
-            <Card.Title>Pasar 16 Ilir</Card.Title>
+            <Card.Title>XXX</Card.Title>
             <Card.Text>Hiya HIya</Card.Text>
             <Card.Text size="sm">Kitou Akari</Card.Text>
           </Card.Body>
@@ -23,7 +23,7 @@ const Content = () =>{
         <Card className="border-0">
           <Card.Img variant="top" className="p-1 rounded-3 img-size" src={img1} alt="..."/>
           <Card.Body className="border rounded-3 mx-1 shadow-sm">
-            <Card.Title>Sungai Sekanak</Card.Title>
+            <Card.Title>YYY</Card.Title>
             <Card.Text>Hiya HIya</Card.Text>
             <Card.Text size="sm">Kitou Akari</Card.Text>
           </Card.Body>
@@ -31,7 +31,7 @@ const Content = () =>{
         <Card className="border-0">
           <Card.Img variant="top" className="p-1 rounded-3 img-size" src={img3} alt="..."/>
           <Card.Body className="border rounded-3 mx-1 shadow-sm ">
-            <Card.Title>Pulau Kemaro</Card.Title>
+            <Card.Title>ZZZ</Card.Title>
             <Card.Text>Hiya HIya</Card.Text>
             <Card.Text size="sm">Kitou Akari</Card.Text>
           </Card.Body>

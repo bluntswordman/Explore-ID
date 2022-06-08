@@ -1,4 +1,6 @@
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 export const loginUser = async (user) => {
   const { username, password } = user;
@@ -10,6 +12,6 @@ export const loginUser = async (user) => {
     },);
     return window.location.href = "/dashboard";
   }catch(error){
-    console.log(error.response.data);
+    return window.location.href = "/login";
   }
 };

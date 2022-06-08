@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import Map, { Marker, NavigationControl, Popup }from 'react-map-gl';
-import { Offcanvas, Form, Button, ButtonGroup } from 'react-bootstrap';
+import Map, { Marker, NavigationControl }from 'react-map-gl';
+import { Offcanvas, Form, Button, Modal} from 'react-bootstrap';
 import { Icon } from '@iconify/react';
+import { createLocation, deleteLocation, updateLocation } from '../../hooks/core';
 import axios from 'axios';
-
-import { addImage, img4 } from '../../assets/index'
+import { img4 } from '../../assets/index'
+import './MapLocation.css';
 
 const token = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const MapPins = () => {
-  const imageAdd = addImage;
   const contentImg = img4;
-  const curenTest = 'Hallo'
+  const curenTest = 'Rumah Jomblo'
   const [viewport, setViewport] = useState({
-    latitude: -2.8589027866161216,
-    longitude: 104.75324233,
+    latitude: -2.990934,
+    longitude: 104.756554,
     zoom: 12
   });
   const [location, setLocation] = useState([]);
   const [curentPlaceId, setCurentPlaceId] = useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [show, setShow] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  const [id, setId] = useState(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [showEdit, setShowEdit] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
 
   useEffect(() => {
     const getLocation = async () => {
@@ -37,17 +44,40 @@ const MapPins = () => {
 
   const handleMarkerClick = (id) => {
     setCurentPlaceId(id);
+    setId(id);
+    setShowContent(true);
   }
 
   const handleMapClick = (e) => {
-    setNewPlace({
-      lat: e.lngLat.lat,
-      lng: e.lngLat.lng
-    });
+    setNewPlace({ lat: e.lngLat.lat, lng: e.lngLat.lng });
     setShow(true);
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newlat = newPlace.lat;
+    const newlng = newPlace.lng;
+    const newLocation = { title, description, newlat, newlng };
+    
+    createLocation(newLocation);
+  }
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const tempLocation = { id, newTitle, newDescription };
+    updateLocation(tempLocation);
+    setShowEdit(false);
+  }
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    deleteLocation(id);
+  }
+  
   const handleClose = () => setShow(false);
+  const handleCloseContent = () => setShowContent(false);
+  const handleShowEdit = () => setShowEdit(true);
+  const handleCloseEdit = () => setShowEdit(false);
 
   return (
     <>
@@ -75,27 +105,28 @@ const MapPins = () => {
                 onClick={() => handleMarkerClick(loc.id)}/>
             </Marker>
             {loc.id === curentPlaceId && (
-              <Popup longitude={loc.lng} latitude={loc.lat}
-                closeButton={true}
-                closeOnClick={false}
-                onClose={() => setCurentPlaceId(null)}
-                anchor="left" style={{
-                  width: 'auto',
-                  height: "auto"
-                }}>
-                <img src={contentImg} alt={loc.title} style={{
-                  maxWidth:'300px',
-                  borderRadius: '5px'
-                  }}/>
-                  <div className="text-start">
-                    <h5 className="text-capitalize fw-bold ">{loc.title}</h5>
-                    <p className="fst-italic fs-6">{loc.description}</p>
-                  </div>
-                  <ButtonGroup size="sm">
-                    <Button variant='secondary'>Detail</Button>
-                    <Button variant='danger'>hapus</Button>
-                  </ButtonGroup>
-              </Popup>
+              <>
+                <Offcanvas show={showContent} onHide={handleCloseContent}>
+                  <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>{loc.title}</Offcanvas.Title>
+                  </Offcanvas.Header>
+                  <Offcanvas.Body>
+                    <img src={contentImg} alt={loc.title} className="img-popup"/>
+                    <div className="about-popup">
+                      <p className='author-popup'>By Fire Lord Izumi</p>
+                      <p className='description-popup'>"{loc.description}"</p>
+                    </div>
+                    <div className="button-popup">
+                      <Button variant="primary" size="sm" onClick={handleShowEdit}>edit</Button>
+                      <Button variant="danger" size="sm" onClick={handleDelete}>hapus</Button>
+                    </div>
+                    <p class="text-break">____________________________________________________</p>
+                  </Offcanvas.Body>
+                  <Offcanvas.Body>
+                    <p></p>
+                  </Offcanvas.Body>
+                </Offcanvas>
+              </>
             )}
           </>
         ))}
@@ -105,21 +136,37 @@ const MapPins = () => {
               <Offcanvas.Title>Tambah Tempat WIsata</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Control type="image" src={imageAdd} alt="Submit" width="50" height="250" />
+                  <Form.Control type="file" alt="upload-image" width="50" height="250"/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Control type="text" placeholder="Masukan Judul" />
+                  <Form.Control type="text" placeholder="Masukan Judul" value={title} onChange={(e) => setTitle(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Control type="text" placeholder="Deskripsikan Tempat yang ingin anda bagikan" />
+                  <Form.Control as="textarea" rows={12} placeholder="Deskripsikan Tempat yang ingin anda bagikan" value={description} onChange={(e) => setDescription(e.target.value)}/>
                 </Form.Group>
                 <Button variant="secondary" type="submit">Simpan</Button>
               </Form>
             </Offcanvas.Body>
           </Offcanvas>
         )}
+        <Modal show={showEdit} onHide={handleCloseEdit}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Data</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleUpdate}>
+              <Form.Group className="mb-3">
+                <Form.Control type="text" placeholder="Masukan Judul" autoComplete='off' value={newTitle} onChange={(e) => setNewTitle(e.target.value)}/>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Control as="textarea" rows={12} placeholder="Deskripsikan Tempat yang ingin anda bagikan" value={newDescription} onChange={(e) => setNewDescription(e.target.value)}/>
+              </Form.Group>
+              <Button variant="primary" type='submit'>Simpan</Button>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </Map>
     </>
   )

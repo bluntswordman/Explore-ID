@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { useRefreshToken } from "../token/refreshToken";
 
@@ -20,12 +19,9 @@ export const useProfile = () => {
     
     try {
       const response = await accessJWT.get(`http://localhost:5000/v1/user/${id}`, config);
-      // console.log(userId);
-      // console.log(response.data);
       setName(response.data.name);
       setUsername(response.data.username);
     } catch (error) {
-      // console.log(error.response);
       if (error.response.status === 401) {
         return window.location.href = "/login";
       }

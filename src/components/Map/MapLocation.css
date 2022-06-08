@@ -1,0 +1,31 @@
+.img-popup {
+  max-width: 22.5em;
+  border-radius: 10px;
+}
+
+.about-popup {
+  margin-top: 2px;
+}
+
+.about-popup .author-popup {
+  font-style: italic;
+  font-size: medium;
+}
+
+.about-popup .description-popup {
+  margin-top: -10px;
+  text-align: center;
+}
+
+.button-popup {
+  text-align: end;
+}
+
+.button-popup Button {
+  margin: 2px;
+}
+
+.form-desc {
+  height: 200px;
+}
+
