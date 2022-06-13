@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
@@ -12,6 +13,10 @@ export const loginUser = async (user) => {
     },);
     return window.location.href = "/dashboard";
   }catch(error){
-    return window.location.href = "/login";
+    return Swal.fire({
+      title: error.response.data.msg,
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    });
   }
 };

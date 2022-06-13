@@ -1,12 +1,18 @@
-import axios from "axios";
-
 const updateLocation = async (location) => {
-  const { id, newTitle, newDescription } = location;
+  const { id, newTitle, newDescription, name, token, accessJWT  } = location;
+
+  let config = {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }
+
   try {
-    await axios.put(`http://localhost:5000/v1/location/${id}`, {
+    await accessJWT.put(`http://localhost:5000/v1/location/${id}`, {
       title: newTitle,
-      description: newDescription
-    });
+      description: newDescription,
+      name: name
+    }, config);
     return window.location.reload();
   } catch (err) {
     console.error(err);

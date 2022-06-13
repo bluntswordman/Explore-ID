@@ -2,12 +2,12 @@ import React from 'react';
 import { Dropdown, Nav, Container } from "react-bootstrap";
 import { Icon } from '@iconify/react';
 import { useLogOutUser } from '../../hooks/users/logout';
-import { useProfile } from '../../hooks/users/profile';
+import { Personal } from '../../hooks/users/profile';
 import './Navigation.css';
 
 const Navigation = () => {
   const {logOutUser} = useLogOutUser();
-  const {name} = useProfile();
+  const {name} = Personal();
   const isTrue = !name;
   
   return (

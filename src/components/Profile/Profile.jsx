@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Container, Row, Card, Col, Button, Modal, Form } from "react-bootstrap";
 import { defaultProfile } from '../../assets/index';
-import { useProfile } from '../../hooks/users/profile';
-import { useRefreshToken } from "../../hooks/token/refreshToken";
+import { Personal } from '../../hooks/users/profile';
+import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import './Profile.css';
 
 const imageProfile = defaultProfile;
 
 const Profile = () => {
-  const {name, username} = useProfile();
+  const {name, username} = Personal();
   const [updateName, setUpdateName] = useState('');
   const [updateUsername, setUpdateUsername] = useState('');
-  const { userId, token, accessJWT } = useRefreshToken();
+  const { userId, token, accessJWT } = GetRefreshToken();
   const [show, setShow] = useState(false);
 
   const handleSubmit = async (e) => {

@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import { useRefreshToken } from "../token/refreshToken";
+import { GetRefreshToken } from "../token/refreshToken";
 
-export const useProfile = () => {
-  const { userId, token, accessJWT } = useRefreshToken();
+export const Personal = () => {
+  const { userId, token, accessJWT } = GetRefreshToken();
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
 

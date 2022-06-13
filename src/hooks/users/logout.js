@@ -1,7 +1,7 @@
-import { useRefreshToken } from "../token/refreshToken";
+import { GetRefreshToken } from "../token/refreshToken";
 
 export const useLogOutUser = () => {
-  const { token, accessJWT } = useRefreshToken();
+  const { token, accessJWT } = GetRefreshToken();
 
   let config = {
     headers: {

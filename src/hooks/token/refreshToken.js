@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-export const useRefreshToken = () => {
+export const GetRefreshToken = () => {
   const [userId, setUserId] = useState('');
+  const [name, setName] = useState('');
   const [token, setToken] = useState('');
   const [expired, setExpired] = useState('');
 
@@ -17,17 +18,18 @@ export const useRefreshToken = () => {
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
       setUserId(decoded.userId);
+      setName(decoded.name);
       setExpired(decoded.exp);
     } catch (error) {
-      // console.log(error.response.data.msg);
+      console.log(error.response.data.msg);
       if (error.response.status === 401) {
         return window.location.href = "/login";
       }
     }
   }
 
-  const accessJWT = axios.create()
-
+  const accessJWT = axios.create();
+  
   accessJWT.interceptors.request.use(async(config) => {
     const currentDate = new Date();
     if (expired * 1000 < currentDate.getTime()) {
@@ -39,14 +41,15 @@ export const useRefreshToken = () => {
       setExpired(decoded.exp);
     }
     return config;
-
+    
   }, (error) => {
     return Promise.reject(error);
   });
 
   return {
     userId,
+    name,
     token,
-    accessJWT
+    accessJWT,
   }
 }

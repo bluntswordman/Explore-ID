@@ -13,9 +13,6 @@ const RegisterForm = () => {
     e.preventDefault();
     const user = { username, name, password, confirmPassword };
     
-    if (password !== confirmPassword) {
-      return alert('Passwords do not match');
-    }
     registerUser(user)
   };
 

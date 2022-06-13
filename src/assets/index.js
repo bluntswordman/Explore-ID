@@ -6,6 +6,7 @@ import img5 from './content/content-5.jpg';
 import defaultProfile from './content/default-user.jpg';
 import pinLocation from './icon/pin.png';
 import addImage from './icon/add-photo.png';
+import defaultpng from './img/3664074.gif'
 
 export {
   img1,
@@ -15,5 +16,6 @@ export {
   img5,
   defaultProfile,
   pinLocation,
-  addImage
+  addImage,
+  defaultpng
 }

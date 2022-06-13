@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const registerUser = async (user) => {
   const { name, username, password, confirmPassword } = user;
@@ -12,6 +13,10 @@ export const registerUser = async (user) => {
     });
     return window.location.href = "/login";
   }catch(error){
-    return error;
+    return Swal.fire({
+      title: error.response.data.msg,
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    });
   }
 }

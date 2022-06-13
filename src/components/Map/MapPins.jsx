@@ -3,15 +3,15 @@ import Map, { Marker, NavigationControl }from 'react-map-gl';
 import { Offcanvas, Form, Button, Modal} from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import { createLocation, deleteLocation, updateLocation } from '../../hooks/core';
+import { Personal } from '../../hooks/users/profile';
+import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import axios from 'axios';
-import { img4 } from '../../assets/index'
+import { defaultpng } from '../../assets/index'
 import './MapLocation.css';
 
-const token = process.env.REACT_APP_MAPBOX_TOKEN;
+const mapToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const MapPins = () => {
-  const contentImg = img4;
-  const curenTest = 'Rumah Jomblo'
   const [viewport, setViewport] = useState({
     latitude: -2.990934,
     longitude: 104.756554,
@@ -25,9 +25,16 @@ const MapPins = () => {
   const [id, setId] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [poster, setPoster] = useState('');
+  const [images, setImages] = useState();
   const [showEdit, setShowEdit] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
+
+  const {name} = Personal();
+  const isValid = !name;
+  const curentUser = name;
+  const { userId, token, accessJWT } = GetRefreshToken();
 
   useEffect(() => {
     const getLocation = async () => {
@@ -42,9 +49,19 @@ const MapPins = () => {
     getLocation();
   }, []);
 
-  const handleMarkerClick = (id) => {
-    setCurentPlaceId(id);
-    setId(id);
+  const onImageUpload = (e) => {
+    const file = e.target.files[0];
+    setImages(file);
+    try {
+      setPoster(URL.createObjectURL(file));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleMarkerClick = (getId) => {
+    setCurentPlaceId(getId);
+    setId(getId);
     setShowContent(true);
   }
 
@@ -57,14 +74,14 @@ const MapPins = () => {
     e.preventDefault();
     const newlat = newPlace.lat;
     const newlng = newPlace.lng;
-    const newLocation = { title, description, newlat, newlng };
+    const newLocation = { title, description, images, newlat, newlng, name, userId, token, accessJWT };
     
     createLocation(newLocation);
   }
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const tempLocation = { id, newTitle, newDescription };
+    const tempLocation = { id, newTitle, newDescription, name, token, accessJWT };
     updateLocation(tempLocation);
     setShowEdit(false);
   }
@@ -82,7 +99,7 @@ const MapPins = () => {
   return (
     <>
       <Map
-        mapboxAccessToken={token}
+        mapboxAccessToken={mapToken}
         onViewportChange={setViewport}
         initialViewState={viewport}
         style={{width: '100%', height: '90vh'}}
@@ -99,7 +116,7 @@ const MapPins = () => {
             >
               <Icon
                 icon="ic:twotone-room" 
-                color= {loc.title === curenTest ? '#00ff00' : '#ff0000'}
+                color= {loc.name === curentUser ? '#00ff00' : '#ff0000'}
                 height="35" 
                 cursor="pointer"
                 onClick={() => handleMarkerClick(loc.id)}/>
@@ -111,16 +128,18 @@ const MapPins = () => {
                     <Offcanvas.Title>{loc.title}</Offcanvas.Title>
                   </Offcanvas.Header>
                   <Offcanvas.Body>
-                    <img src={contentImg} alt={loc.title} className="img-popup"/>
+                    <img src={loc.image === null || loc.image === 'no-image.png' ? defaultpng :`http://localhost:5000/v1/${loc.image}`} alt={loc.title} className="img-popup"/>
                     <div className="about-popup">
-                      <p className='author-popup'>By Fire Lord Izumi</p>
+                      <p className='author-popup'>By {loc.name}</p>
                       <p className='description-popup'>"{loc.description}"</p>
                     </div>
-                    <div className="button-popup">
-                      <Button variant="primary" size="sm" onClick={handleShowEdit}>edit</Button>
-                      <Button variant="danger" size="sm" onClick={handleDelete}>hapus</Button>
-                    </div>
-                    <p class="text-break">____________________________________________________</p>
+                    {loc.name === curentUser && (
+                      <div className="button-popup">
+                        <Button variant="primary" size="sm" onClick={handleShowEdit}>edit</Button>
+                        <Button variant="danger" size="sm" onClick={handleDelete}>hapus</Button>
+                      </div>
+                    )}
+                    <p className="text-break">____________________________________________________</p>
                   </Offcanvas.Body>
                   <Offcanvas.Body>
                     <p></p>
@@ -133,21 +152,32 @@ const MapPins = () => {
         {newPlace && (
           <Offcanvas show={show} onHide={handleClose}>
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Tambah Tempat WIsata</Offcanvas.Title>
+              <Offcanvas.Title>Tambah Tempat Wisata</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Control type="file" alt="upload-image" width="50" height="250"/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Control type="text" placeholder="Masukan Judul" value={title} onChange={(e) => setTitle(e.target.value)}/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Control as="textarea" rows={12} placeholder="Deskripsikan Tempat yang ingin anda bagikan" value={description} onChange={(e) => setDescription(e.target.value)}/>
-                </Form.Group>
-                <Button variant="secondary" type="submit">Simpan</Button>
-              </Form>
+              {
+                isValid ? (
+                  <>
+                    <p>Silahkan login terlebih dahulu untuk menambahkan tempat wisata</p>
+                  </>
+                ) : (
+                  <Form onSubmit={handleSubmit} encType="multipart/form-data">
+                    <Form.Group className="mb-3">
+                      {poster && (
+                        <img src={poster} alt="poster" className="img-popup"/>
+                      )}
+                      <Form.Control type="file" name='images' width="50" height="250" onChange={(e) => onImageUpload(e)} encType=""/>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                      <Form.Control type="text" placeholder="Masukan Judul" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                      <Form.Control as="textarea" rows={12} placeholder="Deskripsikan Tempat yang ingin anda bagikan" value={description} onChange={(e) => setDescription(e.target.value)}/>
+                    </Form.Group>
+                    <Button variant="secondary" type="submit">Simpan</Button>
+                  </Form>
+                )
+              }
             </Offcanvas.Body>
           </Offcanvas>
         )}
