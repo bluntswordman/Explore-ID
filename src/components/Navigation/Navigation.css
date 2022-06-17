@@ -1,6 +1,6 @@
 .title-nav {
   font-size: 1.7rem !important;
-  font-weight: bold;
+  font-weight: bold !important;
   color: var(--bs-teal) !important;
 }
 

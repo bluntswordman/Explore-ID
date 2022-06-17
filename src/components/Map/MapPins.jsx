@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Map, { Marker, NavigationControl }from 'react-map-gl';
-import { Offcanvas, Form, Button, Modal} from 'react-bootstrap';
+import { Offcanvas, Form, Button, Modal, InputGroup, Card, Accordion } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import { createLocation, deleteLocation, updateLocation } from '../../hooks/core';
 import { Personal } from '../../hooks/users/profile';
@@ -109,11 +109,7 @@ const MapPins = () => {
         <NavigationControl/>
         {location.map(loc => (
           <>
-            <Marker
-              key={loc._id}
-              latitude={loc.lat}
-              longitude={loc.lng}
-            >
+            <Marker key={loc._id} latitude={loc.lat} longitude={loc.lng}>
               <Icon
                 icon="ic:twotone-room" 
                 color= {loc.name === curentUser ? '#00ff00' : '#ff0000'}
@@ -121,7 +117,7 @@ const MapPins = () => {
                 cursor="pointer"
                 onClick={() => handleMarkerClick(loc.id)}/>
             </Marker>
-            {loc.id === curentPlaceId && (
+            { loc.id === curentPlaceId && (
               <>
                 <Offcanvas show={showContent} onHide={handleCloseContent}>
                   <Offcanvas.Header closeButton>
@@ -142,8 +138,33 @@ const MapPins = () => {
                     <p className="text-break">____________________________________________________</p>
                   </Offcanvas.Body>
                   <Offcanvas.Body>
-                    <p></p>
+                    <Accordion flush>
+                      <Accordion.Item eventKey="0">
+                        <Accordion.Header>Komentar</Accordion.Header>
+                        <Accordion.Body>
+                          <Card border="light" style={{ width: '100%' }} className="my-2">
+                            <Card.Header>Nama Komentator</Card.Header>
+                            <Card.Body>
+                              <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                              <small className="text-muted">Last updated 3 mins ago</small>
+                            </Card.Footer>
+                          </Card>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
                   </Offcanvas.Body>
+                  { !isValid && (
+                    <Offcanvas.Body>
+                      <Form>
+                        <InputGroup style={{ overflow: 'hidden' }}>
+                          <Form.Control placeholder="Ketikan komentar disini" aria-label="Ketikan komentar disini" aria-describedby="basic-addon2"/>
+                          <Button variant="outline-secondary" id="button-addon2">Kirim</Button>
+                        </InputGroup>
+                      </Form>
+                    </Offcanvas.Body>
+                  )}
                 </Offcanvas>
               </>
             )}
@@ -155,29 +176,27 @@ const MapPins = () => {
               <Offcanvas.Title>Tambah Tempat Wisata</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              {
-                isValid ? (
-                  <>
-                    <p>Silahkan login terlebih dahulu untuk menambahkan tempat wisata</p>
-                  </>
+              { isValid ? (
+                <>
+                  <p>Silahkan login terlebih dahulu untuk menambahkan tempat wisata</p>
+                </>
                 ) : (
-                  <Form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <Form.Group className="mb-3">
-                      {poster && (
-                        <img src={poster} alt="poster" className="img-popup"/>
-                      )}
-                      <Form.Control type="file" name='images' width="50" height="250" onChange={(e) => onImageUpload(e)} encType=""/>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                      <Form.Control type="text" placeholder="Masukan Judul" value={title} onChange={(e) => setTitle(e.target.value)}/>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                      <Form.Control as="textarea" rows={12} placeholder="Deskripsikan Tempat yang ingin anda bagikan" value={description} onChange={(e) => setDescription(e.target.value)}/>
-                    </Form.Group>
-                    <Button variant="secondary" type="submit">Simpan</Button>
-                  </Form>
-                )
-              }
+                <Form onSubmit={handleSubmit} encType="multipart/form-data">
+                  <Form.Group className="mb-3">
+                    {poster && (
+                      <img src={poster} alt="poster" className="img-popup"/>
+                    )}
+                    <Form.Control type="file" name='images' width="50" height="250" onChange={(e) => onImageUpload(e)} encType=""/>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Control type="text" placeholder="Masukan Judul" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Control as="textarea" rows={12} placeholder="Deskripsikan Tempat yang ingin anda bagikan" value={description} onChange={(e) => setDescription(e.target.value)}/>
+                  </Form.Group>
+                  <Button variant="secondary" type="submit">Simpan</Button>
+                </Form>
+              )}
             </Offcanvas.Body>
           </Offcanvas>
         )}
