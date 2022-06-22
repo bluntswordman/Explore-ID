@@ -7,6 +7,7 @@ import defaultProfile from './content/default-user.jpg';
 import pinLocation from './icon/pin.png';
 import addImage from './icon/add-photo.png';
 import defaultpng from './img/3664074.gif'
+import maplanding from './img/map-landing.png'
 
 export {
   img1,
@@ -17,5 +18,6 @@ export {
   defaultProfile,
   pinLocation,
   addImage,
-  defaultpng
+  defaultpng,
+  maplanding,
 }

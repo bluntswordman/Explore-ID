@@ -1,12 +1,12 @@
 import React from 'react'
-import { Navigation, Profile, Location } from '../../components/index'
+import { Navigation, Profile, MyPost } from '../../components/index'
 
 const Dashboard = () => {
   return (
     <>
       <Navigation />
       <Profile />
-      <Location />
+      <MyPost />
     </>
   )
 }

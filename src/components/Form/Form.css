@@ -12,7 +12,6 @@
   color: #fff;
   font-size: 34px;
   font-weight: bold;
-  font-style: italic;
   padding-top: 150px;
   text-transform: uppercase;
 }
@@ -25,14 +24,12 @@
 .text-description {
   color: #fff;
   font-size: 18px;
-  font-style: italic;
   margin: -15px 0 25px 0;
 }
 
 .text-question {
   color: #fff;
   font-size: 15px;
-  font-style: italic;
   margin: -15px 0 25px 15px;
 }
 
@@ -48,7 +45,7 @@
 
 .form-local {
   display: grid;
-  place-items: end;
+  place-items: center;
 }
 
 .input-form {
@@ -95,6 +92,11 @@
     height: 100vh;
     overflow: hidden;
     text-align: end;
+  }
+
+  .form-local {
+    display: grid;
+    place-items: end;
   }
 }
 

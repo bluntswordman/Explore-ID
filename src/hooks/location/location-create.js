@@ -11,19 +11,19 @@ const createLocation = async (location) => {
   formData.append('userId', userId);
 
   await accessJWT("http://localhost:5000/v1/location", {
-        method: "POST",
-        data: formData,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-          },})
-        .then((res) => {
-          window.location.reload();
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    method: "POST",
+    data: formData,
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+      },})
+    .then((res) => {
+      window.location.reload();
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 export default createLocation;

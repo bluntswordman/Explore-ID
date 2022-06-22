@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+// /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { GetRefreshToken } from "../token/refreshToken";
 
@@ -9,7 +9,7 @@ export const Personal = () => {
 
   useEffect(() => {
     getProfile(userId);
-  },[userId]);
+  });
   
   const getProfile = async (id) => {
     let config = {

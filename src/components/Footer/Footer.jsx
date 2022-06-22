@@ -1,42 +1,38 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Nav } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
-import './Footer.css';
 
 const Footer = () => {
   return (
     <Container className="footer-container border-top text-start">
       <Row>
-        <Col className='md-2'>
-          <a href="http:/" target="_blank" rel="noopener noreferrer" className="text-decoration-none title-footer">Explore ID</a>
+        <Col className="d-flex">
+          <Nav.Link href="/" className="text-decoration-none fw-bold fs-3">Explore ID</Nav.Link>
         </Col>
       </Row>
       <Row>
-        <Col>
-          <a href="/" className="text-decoration-none text-dark fw-bolder">Tentang Kami</a>
-          <span className="px-1 fw-bold">|</span>
-          <a href="/" className="px-1 text-decoration-none text-dark fw-bolder">Kontak Kami</a>
+        <Col className="d-flex">
+          <Nav.Link href="/about" className="text-decoration-none text-dark fw-bolder">Tentang Kami</Nav.Link>
+          <Icon icon="ci:line-xl" color="#000" height="21" />
+          <Nav.Link href="/contact" className="text-decoration-none text-dark fw-bolder">Kontak Kami</Nav.Link>
         </Col>
       </Row>
       <Row>
-        <Col>
-          <a href="https://web.facebook.com/" target="_blank" rel="noopener noreferrer">  
+        <Col className="d-flex">
+          <Nav.Link href="https://web.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <Icon icon="jam:facebook-square" color="#41436a" height="30" />
+          </Nav.Link>
+          <Nav.Link href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
             <Icon icon="jam:instagram" color="#41436a" height="30" />
-          </a>
-          <a href="https://www.instagram.com/" className="px-1" target="_blank" rel="noopener noreferrer">
-            <Icon icon="jam:instagram" color="#41436a" height="30" />
-          </a>
-          <a href="https://github.com/bluntswordman" className="px-1" target="_blank" rel="noopener noreferrer">
+          </Nav.Link>
+          <Nav.Link href="https://github.com/bluntswordman" target="_blank" rel="noopener noreferrer">
             <Icon icon="jam:github-square" color="#41436a" height="30" />
-          </a>
-          <a href="https://www.youtube.com/" className="px-1" target="_blank" rel="noopener noreferrer">
-            <Icon icon="jam:youtube-square" color="#41436a" height="30" />
-          </a>
+          </Nav.Link>
         </Col>
       </Row>
       <Row>
-        <Col>
-          <p>© 2022 All Rights Reserved, Explore ID</p>
+        <Col className="d-flex">
+          <Nav.Link eventKey="disabled" disabled>© 2022 All Rights Reserved, Explore ID</Nav.Link>
         </Col>
       </Row>
     </Container>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Map, { Marker, NavigationControl }from 'react-map-gl';
-import { Offcanvas, Form, Button, Modal, InputGroup, Card, Accordion } from 'react-bootstrap';
+import { Offcanvas, Form, Button, Modal, InputGroup, Card, Accordion, Nav } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import { createLocation, deleteLocation, updateLocation } from '../../hooks/core';
+import createComment from '../../hooks/comment/addComment'
 import { Personal } from '../../hooks/users/profile';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import axios from 'axios';
@@ -30,6 +31,8 @@ const MapPins = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
+  const [comment, setComment] = useState('');
+  const [showComment, setShowComment] = useState([]);
 
   const {name} = Personal();
   const isValid = !name;
@@ -46,8 +49,18 @@ const MapPins = () => {
       }
     };
 
+    const getComment = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/v1/comment/${id}`);
+        setShowComment(res.data);
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
     getLocation();
-  }, []);
+    getComment();
+  }, [id]);
 
   const onImageUpload = (e) => {
     const file = e.target.files[0];
@@ -90,11 +103,25 @@ const MapPins = () => {
     e.preventDefault();
     deleteLocation(id);
   }
+
+  const handleSaveComment = async (e) => {
+    e.preventDefault();
+    const newComment = { comment, name, userId, id, token, accessJWT };
+    createComment(newComment);
+  }
   
   const handleClose = () => setShow(false);
   const handleCloseContent = () => setShowContent(false);
   const handleShowEdit = () => setShowEdit(true);
   const handleCloseEdit = () => setShowEdit(false);
+
+  // console.log(showComment);
+
+  // if (showComment.comments.length === 0) {
+  //   console.log('null');
+  // }
+
+  // showComment.comments.length === 0 ? console.log('null') : console.log(showComment.comments);
 
   return (
     <>
@@ -109,7 +136,7 @@ const MapPins = () => {
         <NavigationControl/>
         {location.map(loc => (
           <>
-            <Marker key={loc._id} latitude={loc.lat} longitude={loc.lng}>
+            <Marker key={loc.id} latitude={loc.lat} longitude={loc.lng}>
               <Icon
                 icon="ic:twotone-room" 
                 color= {loc.name === curentUser ? '#00ff00' : '#ff0000'}
@@ -121,13 +148,13 @@ const MapPins = () => {
               <>
                 <Offcanvas show={showContent} onHide={handleCloseContent}>
                   <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>{loc.title}</Offcanvas.Title>
+                    <Offcanvas.Title className="fs-4 fw-semibold">{loc.title}</Offcanvas.Title>
                   </Offcanvas.Header>
                   <Offcanvas.Body>
                     <img src={loc.image === null || loc.image === 'no-image.png' ? defaultpng :`http://localhost:5000/v1/${loc.image}`} alt={loc.title} className="img-popup"/>
                     <div className="about-popup">
-                      <p className='author-popup'>By {loc.name}</p>
-                      <p className='description-popup'>"{loc.description}"</p>
+                      <Nav.Link eventKey="disabled" className="fst-italic mb-2" disabled>By {loc.name}</Nav.Link>
+                      <Nav.Link eventKey="disabled" className="text-center" disabled>"{loc.description}"</Nav.Link>
                     </div>
                     {loc.name === curentUser && (
                       <div className="button-popup">
@@ -135,36 +162,36 @@ const MapPins = () => {
                         <Button variant="danger" size="sm" onClick={handleDelete}>hapus</Button>
                       </div>
                     )}
-                    <p className="text-break">____________________________________________________</p>
-                  </Offcanvas.Body>
-                  <Offcanvas.Body>
-                    <Accordion flush>
+                    <Accordion className="my-3 p-2" flush>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>Komentar</Accordion.Header>
                         <Accordion.Body>
-                          <Card border="light" style={{ width: '100%' }} className="my-2">
-                            <Card.Header>Nama Komentator</Card.Header>
-                            <Card.Body>
-                              <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                              <small className="text-muted">Last updated 3 mins ago</small>
-                            </Card.Footer>
-                          </Card>
+                          {showComment.comments.length === 0 ? 
+                            <h1>TIdak ada Komentar</h1> : showComment.comments.map(comment =>
+                            <Card border="light" style={{ width: '100%' }} className="my-3">
+                              <Card.Header>{comment.commentAuthor}</Card.Header>
+                              <Card.Body>
+                                <Card.Text>{comment.commentBody}</Card.Text>
+                              </Card.Body>
+                              <Card.Footer>
+                                <Nav.Link eventKey="disabled" className="text-muted fs-6" disabled>Last updated 3 mins ago</Nav.Link>
+                              </Card.Footer>
+                            </Card>
+                          )}
                         </Accordion.Body>
                       </Accordion.Item>
                     </Accordion>
                   </Offcanvas.Body>
-                  { !isValid && (
-                    <Offcanvas.Body>
-                      <Form>
+                  <Offcanvas.Body>
+                    { !isValid && (
+                      <Form onSubmit={handleSaveComment}>
                         <InputGroup style={{ overflow: 'hidden' }}>
-                          <Form.Control placeholder="Ketikan komentar disini" aria-label="Ketikan komentar disini" aria-describedby="basic-addon2"/>
-                          <Button variant="outline-secondary" id="button-addon2">Kirim</Button>
+                          <Form.Control placeholder="Ketikan komentar disini" aria-label="Ketikan komentar disini" aria-describedby="basic-addon2" value={comment} onChange={e => setComment(e.target.value)} />
+                          <Button variant="outline-secondary" id="button-addon2" type="submit">Kirim</Button>
                         </InputGroup>
                       </Form>
-                    </Offcanvas.Body>
-                  )}
+                    )}
+                  </Offcanvas.Body>
                 </Offcanvas>
               </>
             )}
@@ -173,12 +200,12 @@ const MapPins = () => {
         {newPlace && (
           <Offcanvas show={show} onHide={handleClose}>
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Tambah Tempat Wisata</Offcanvas.Title>
+              <Offcanvas.Title className="fs-4 fw-semibold">Tambah Tempat Wisata</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               { isValid ? (
                 <>
-                  <p>Silahkan login terlebih dahulu untuk menambahkan tempat wisata</p>
+                  <Nav.Link eventKey="disabled" className="text-muted fs-6" disabled>Silahkan login terlebih dahulu untuk menambahkan tempat wisata</Nav.Link>
                 </>
                 ) : (
                 <Form onSubmit={handleSubmit} encType="multipart/form-data">

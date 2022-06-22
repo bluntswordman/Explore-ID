@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, CardGroup, Card, Row, Col} from "react-bootstrap";
+import { Container, CardGroup, Card, Row, Col, Nav } from "react-bootstrap";
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
 
-const Location = () => {
+const MyPost = () => {
   const { userId, accessJWT } = GetRefreshToken();
   const [showContent, setShowContent] = useState([]);
 
@@ -20,7 +20,7 @@ const Location = () => {
   
   return (
     <Container className='my-5'>
-      <h2 className='text-start'>Postingan Saya</h2>
+      <Nav.Link eventKey="disabled" className="fw-bold fs-2" disabled>Postingan Saya</Nav.Link>
       <CardGroup>
         <Row xs={1} md={3} className="g-4">
           {showContent === [] || showContent === null ? console.log('no content') : showContent.map((item) => {
@@ -28,10 +28,9 @@ const Location = () => {
               Array.from({ length: 1 }).map((_, idx) => (
                 <Col>
                   <Card>
-                    <Card.Img variant="top" src={`http://localhost:5000/v1/${item.image}`}/>
+                    <Card.Img variant="top" className="image-content" src={`http://localhost:5000/v1/${item.image}`}/>
                     <Card.Body>
                       <Card.Title>{item.title}</Card.Title>
-                      <Card.Text>{item.description}</Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -42,6 +41,6 @@ const Location = () => {
       </CardGroup>
     </Container>
   )
-};
+}
 
-export default Location;
+export default MyPost
