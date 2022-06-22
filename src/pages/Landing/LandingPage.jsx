@@ -53,13 +53,35 @@ const LandingPage = () => {
           <Navbar.Collapse className="justify-content-end">
             {isTrue ? (
               <>  
-                <Nav.Link href="/login" className="mx-2">Masuk</Nav.Link>
-                <Nav.Link href="/register" className="mx-2 badge-register">Daftar</Nav.Link>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDarkDropdown">
+                  <ul class="navbar-nav">
+                    <li class="nav-item dropstart">
+                      <a class="nav-link" href="/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <Icon icon="ep:setting" color="#0F4334" height="30" />
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><Nav.Link href="/login" className="mx-2">Masuk</Nav.Link></li>
+                        <li><Nav.Link href="/register" className="mx-2">Daftar</Nav.Link></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
               </>
             ) : (
               <>
-                <Nav.Link href="/dashboard" className="mx-2">Dashboard</Nav.Link>
-                <Nav.Link onClick={logOutUser} className="mx-2">Keluar</Nav.Link>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDarkDropdown">
+                  <ul class="navbar-nav">
+                    <li class="nav-item dropstart">
+                      <a class="nav-link" href="/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <Icon icon="healthicons:ui-user-profile" color="#0F4334" height="30" />
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><Nav.Link href="/dashboard" className="mx-2">Dashboard</Nav.Link></li>
+                        <li><Nav.Link onClick={logOutUser} className="mx-2">Keluar</Nav.Link></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
               </>
             )}
           </Navbar.Collapse>
@@ -74,9 +96,9 @@ const LandingPage = () => {
             <Nav.Link eventKey="disabled" disabled>This is a website that lets you explore Indonesia. You can search for tours throughout Indonesia, and view information on them.</Nav.Link>
             <p>
               Silahkan
-              <a href="/login" target="_blank" className='text-decoration-none'> masuk </a> 
+              <a href="/login" className='text-decoration-none'> masuk </a> 
               untuk memulai. atau mulai
-              <a href="/location" target="_blank" className='text-decoration-none'> Jelajah </a>
+              <a href="/location" className='text-decoration-none'> Jelajah </a>
             </p>
           </Col>
         </Row>

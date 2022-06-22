@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Nav, Container } from "react-bootstrap";
+import { Nav, Container, Navbar } from "react-bootstrap";
 import { Icon } from '@iconify/react';
 import { useLogOutUser } from '../../hooks/users/logout';
 import { Personal } from '../../hooks/users/profile';
@@ -11,34 +11,46 @@ const Navigation = () => {
   const isTrue = !name;
   
   return (
-    <Nav className="navbar navbar-light bg-secondary text-dark bg-opacity-10">
+    <Navbar>
       <Container>
-        <Nav.Item>
-          <Nav.Link href="/" className="navbar-brand title-nav">Explore ID</Nav.Link>
-        </Nav.Item>
-      <Dropdown alignRight className="dropdown m-0">
-        <Dropdown.Toggle className='btn-core'>
-          <Icon icon="bxs:user-pin" color="#41436a" height="20" />
-        </Dropdown.Toggle>
-          <Dropdown.Menu style={{ 
-            margin: '0 auto',
-          }}>
-            {
-              isTrue ? (
-                <>
-                  <Dropdown.Item href="/login">Masuk</Dropdown.Item>
-                </>
-              ) : (
-                <>
-                  <Dropdown.Item href='/dashboard'>Dashboard</Dropdown.Item>
-                  <Dropdown.Item onClick={logOutUser}>Keluar</Dropdown.Item>
-                </>
-              )
-            }
-          </Dropdown.Menu>
-      </Dropdown>
-    </Container>
-  </Nav>
+        <Navbar.Brand href="/" className="fs-4 fw-bold" style={{color: '#0F4334'}}>Explore ID</Navbar.Brand>
+        <Navbar.Collapse className="justify-content-end">
+          {isTrue ? (
+            <>  
+              <div class="collapse navbar-collapse justify-content-end" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item dropstart">
+                    <a class="nav-link" href="/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <Icon icon="ep:setting" color="#0F4334" height="30" />
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <li><Nav.Link href="/login" className="mx-2">Masuk</Nav.Link></li>
+                      <li><Nav.Link href="/register" className="mx-2">Daftar</Nav.Link></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </>
+          ) : (
+            <>
+              <div class="collapse navbar-collapse justify-content-end" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item dropstart">
+                    <a class="nav-link" href="/" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <Icon icon="healthicons:ui-user-profile" color="#0F4334" height="30" />
+                    </a>
+                    <ul ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <li><Nav.Link href="/dashboard" className="mx-2">Dashboard</Nav.Link></li>
+                      <li><Nav.Link onClick={logOutUser} className="mx-2">Keluar</Nav.Link></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </>
+          )}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   )
 };
 

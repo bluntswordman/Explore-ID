@@ -28,7 +28,7 @@ const MyPost = () => {
               Array.from({ length: 1 }).map((_, idx) => (
                 <Col>
                   <Card>
-                    <Card.Img variant="top" className="image-content" src={`http://localhost:5000/v1/${item.image}`}/>
+                    <Card.Img variant="top" src={`http://localhost:5000/v1/${item.image}`}/>
                     <Card.Body>
                       <Card.Title>{item.title}</Card.Title>
                     </Card.Body>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Map, { Marker, NavigationControl }from 'react-map-gl';
+import Map, { Marker, NavigationControl, GeolocateControl }from 'react-map-gl';
 import { Offcanvas, Form, Button, Modal, InputGroup, Card, Accordion, Nav } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import { createLocation, deleteLocation, updateLocation } from '../../hooks/core';
@@ -7,16 +7,16 @@ import createComment from '../../hooks/comment/addComment'
 import { Personal } from '../../hooks/users/profile';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import axios from 'axios';
-import { defaultpng } from '../../assets/index'
+import { defaultpng, addImage, defaultProfile } from '../../assets/index'
 import './MapLocation.css';
 
 const mapToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const MapPins = () => {
   const [viewport, setViewport] = useState({
-    latitude: -2.990934,
-    longitude: 104.756554,
-    zoom: 12
+    latitude: -1.989275,
+    longitude: 119.921327,
+    zoom: 3.921327
   });
   const [location, setLocation] = useState([]);
   const [curentPlaceId, setCurentPlaceId] = useState(null);
@@ -26,7 +26,7 @@ const MapPins = () => {
   const [id, setId] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [poster, setPoster] = useState('');
+  const [poster, setPoster] = useState(addImage);
   const [images, setImages] = useState();
   const [showEdit, setShowEdit] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -115,25 +115,20 @@ const MapPins = () => {
   const handleShowEdit = () => setShowEdit(true);
   const handleCloseEdit = () => setShowEdit(false);
 
-  // console.log(showComment);
-
-  // if (showComment.comments.length === 0) {
-  //   console.log('null');
-  // }
-
-  // showComment.comments.length === 0 ? console.log('null') : console.log(showComment.comments);
-
   return (
     <>
       <Map
         mapboxAccessToken={mapToken}
         onViewportChange={setViewport}
         initialViewState={viewport}
-        style={{width: '100%', height: '90vh'}}
+        style={{width: '100%', height: '91vh'}}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         onDblClick={handleMapClick}
       >
         <NavigationControl/>
+        <GeolocateControl
+          showAccuracyCircle={false}
+        />
         {location.map(loc => (
           <>
             <Marker key={loc.id} latitude={loc.lat} longitude={loc.lng}>
@@ -154,7 +149,7 @@ const MapPins = () => {
                     <img src={loc.image === null || loc.image === 'no-image.png' ? defaultpng :`http://localhost:5000/v1/${loc.image}`} alt={loc.title} className="img-popup"/>
                     <div className="about-popup">
                       <Nav.Link eventKey="disabled" className="fst-italic mb-2" disabled>By {loc.name}</Nav.Link>
-                      <Nav.Link eventKey="disabled" className="text-center" disabled>"{loc.description}"</Nav.Link>
+                      <Nav.Link eventKey="disabled" className="text-center overflow-hidden" disabled>"{loc.description}"</Nav.Link>
                     </div>
                     {loc.name === curentUser && (
                       <div className="button-popup">
@@ -167,17 +162,30 @@ const MapPins = () => {
                         <Accordion.Header>Komentar</Accordion.Header>
                         <Accordion.Body>
                           {showComment.comments.length === 0 ? 
-                            <h1>TIdak ada Komentar</h1> : showComment.comments.map(comment =>
-                            <Card border="light" style={{ width: '100%' }} className="my-3">
-                              <Card.Header>{comment.commentAuthor}</Card.Header>
-                              <Card.Body>
-                                <Card.Text>{comment.commentBody}</Card.Text>
-                              </Card.Body>
-                              <Card.Footer>
-                                <Nav.Link eventKey="disabled" className="text-muted fs-6" disabled>Last updated 3 mins ago</Nav.Link>
-                              </Card.Footer>
-                            </Card>
-                          )}
+                            <h5>Belum ada yang berkomentar</h5> 
+                            : 
+                            showComment.comments.map(comment =>
+                              <Card border="light" style={{ width: '100%' }} className="my-3">
+                                <Card.Header className="d-flex">
+                                  <Card.Img 
+                                    variant="top" 
+                                    src={defaultProfile} 
+                                    style={{
+                                      maxWidth: '30px',
+                                      height: 'auto',
+                                      marginRight: '10px',
+                                    }}
+                                  />
+                                  <Card.Text className="mt-1">{comment.commentAuthor}</Card.Text>
+                                </Card.Header>
+                                <Card.Body>
+                                  <Card.Text>{comment.commentBody}</Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                  <Nav.Link eventKey="disabled" className="text-muted fs-6" disabled>Last updated 3 mins ago</Nav.Link>
+                                </Card.Footer>
+                              </Card>
+                            )}
                         </Accordion.Body>
                       </Accordion.Item>
                     </Accordion>
