@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Location, Login, Register, Dashboard, LandingPage } from './pages/index';
+import { Location, Login, Register, Dashboard, Home } from './pages/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'swiper/css/bundle';
 import './App.css';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
-            <Route path="/" element={<LandingPage/>}/>
+            <Route path="/" element={<Home/>}/>
           </Routes>
       </Router>
     </div>

@@ -1,18 +1,10 @@
-.title-nav {
-  font-size: 1.7rem !important;
-  font-weight: bold !important;
-  color: var(--bs-teal) !important;
-}
-
-.btn-core {
-  background-color: #20c997 !important;
-  color: white !important;
-  transition: 0.5s;
-  border-color: var(--bs-teal) !important;
-}
-
-.btn-core:hover {
-  background-color: #79dbbe !important;
-  transition: 0.5s;
-  color: white !important;
+.brand-self{
+  font-weight: bold;
+  font-size: 26px;
+  transition: ease-in-out 0.5s;
+  background: linear-gradient(266.08deg, #3D424A -7.66%, #57BEE6 63.09%, rgba(229, 230, 222, 0.63) 110.96%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
 }

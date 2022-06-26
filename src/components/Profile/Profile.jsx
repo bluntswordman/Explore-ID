@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Card, Col, Button, Modal, Form } from "react-bootstrap";
-import { defaultProfile } from '../../assets/index';
+import Swal from "sweetalert2";
+import { defaultProfile } from '../../assets/core';
 import { Personal } from '../../hooks/users/profile';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import './Profile.css';
@@ -22,11 +23,28 @@ const Profile = () => {
       }
     }
     try {
-      await accessJWT.put(`http://localhost:5000/v1/user/${userId}`, {
+      const response = await accessJWT.put(`http://localhost:5000/v1/user/${userId}`, {
         name: updateName,
         username: updateUsername
       }, config)
-      return window.location.reload(false);
+      let timerInterval;
+      Swal.fire({
+        icon: 'success',
+        title: response.data.msg,
+        showConfirmButton: false,
+        timer: 1000,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+          window.location.reload(false);
+        }
+      })
     } catch (err) {
       return err;
     }
@@ -41,7 +59,7 @@ const Profile = () => {
         <Card className="mb-3 profile-img shadow">
           <Row className="g-0 align-items-center">
             <Col>
-              <img src={imageProfile} className="img-fluid rounded-start p-3" alt="..."/>
+              <img src={imageProfile} className="img-fluid rounded-start p-3" alt={username}/>
             </Col>
             <Col className="col-md-8">
               <Card.Body className="text-start">

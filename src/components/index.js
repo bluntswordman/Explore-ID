@@ -5,13 +5,19 @@ import RegisterForm from "./Form/RegisterForm";
 import Profile from "./Profile/Profile";
 import MyPost from "./MyPost/MyPost";
 import MapPins from "./Map/MapPins";
+import Hero from "./Hero/Hero";
+import Recomended from "./Section/Recomended";
+import OurTeam from "./Section/OurTeam";
 
 export { 
-  Navigation,
-  Footer,
   LoginForm,
   RegisterForm,
   Profile,
   MyPost,
   MapPins,
+  Footer,
+  Navigation,
+  Hero,
+  Recomended,
+  OurTeam,
 };

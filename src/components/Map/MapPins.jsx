@@ -7,7 +7,7 @@ import createComment from '../../hooks/comment/addComment'
 import { Personal } from '../../hooks/users/profile';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import axios from 'axios';
-import { defaultpng, addImage, defaultProfile } from '../../assets/index'
+import { noImage, userProfie, addImage } from '../../assets/core';
 import './MapLocation.css';
 
 const mapToken = process.env.REACT_APP_MAPBOX_TOKEN;
@@ -34,9 +34,9 @@ const MapPins = () => {
   const [comment, setComment] = useState('');
   const [showComment, setShowComment] = useState([]);
 
-  const {name} = Personal();
+  const {name, veryfiId} = Personal();
   const isValid = !name;
-  const curentUser = name;
+  const curentUser = veryfiId;
   const { userId, token, accessJWT } = GetRefreshToken();
 
   useEffect(() => {
@@ -121,7 +121,7 @@ const MapPins = () => {
         mapboxAccessToken={mapToken}
         onViewportChange={setViewport}
         initialViewState={viewport}
-        style={{width: '100%', height: '91vh'}}
+        style={{width: '100%', height: '93.8vh'}}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         onDblClick={handleMapClick}
       >
@@ -129,15 +129,26 @@ const MapPins = () => {
         <GeolocateControl
           showAccuracyCircle={false}
         />
-        {location.map(loc => (
+        {location.map(loc => (    
           <>
             <Marker key={loc.id} latitude={loc.lat} longitude={loc.lng}>
-              <Icon
-                icon="ic:twotone-room" 
-                color= {loc.name === curentUser ? '#00ff00' : '#ff0000'}
-                height="35" 
-                cursor="pointer"
-                onClick={() => handleMarkerClick(loc.id)}/>
+              {loc.userId === curentUser ? (
+                <Icon 
+                  icon="ri:map-pin-user-fill" 
+                  color="#0F4334"
+                  height="30" 
+                  cursor="pointer"
+                  onClick={() => handleMarkerClick(loc.id)}
+                  />
+              ) : (
+                <Icon 
+                  icon="tabler:map-pin" 
+                  color="#0F4334" 
+                  height="30"
+                  cursor="pointer"
+                  onClick={() => handleMarkerClick(loc.id)}
+                />  
+              )}
             </Marker>
             { loc.id === curentPlaceId && (
               <>
@@ -146,18 +157,18 @@ const MapPins = () => {
                     <Offcanvas.Title className="fs-4 fw-semibold">{loc.title}</Offcanvas.Title>
                   </Offcanvas.Header>
                   <Offcanvas.Body>
-                    <img src={loc.image === null || loc.image === 'no-image.png' ? defaultpng :`http://localhost:5000/v1/${loc.image}`} alt={loc.title} className="img-popup"/>
+                    <img src={loc.image === null || loc.image === 'no-image.png' ? {noImage} :`http://localhost:5000/v1/${loc.image}`} alt={loc.title} className="img-popup"/>
                     <div className="about-popup">
                       <Nav.Link eventKey="disabled" className="fst-italic mb-2" disabled>By {loc.name}</Nav.Link>
                       <Nav.Link eventKey="disabled" className="text-center overflow-hidden" disabled>"{loc.description}"</Nav.Link>
                     </div>
-                    {loc.name === curentUser && (
-                      <div className="button-popup">
+                    {loc.userId === curentUser && (
+                      <div className="button-popup mt-2">
                         <Button variant="primary" size="sm" onClick={handleShowEdit}>edit</Button>
                         <Button variant="danger" size="sm" onClick={handleDelete}>hapus</Button>
                       </div>
                     )}
-                    <Accordion className="my-3 p-2" flush>
+                    <Accordion className="mt-1" flush>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>Komentar</Accordion.Header>
                         <Accordion.Body>
@@ -169,7 +180,7 @@ const MapPins = () => {
                                 <Card.Header className="d-flex">
                                   <Card.Img 
                                     variant="top" 
-                                    src={defaultProfile} 
+                                    src={userProfie} 
                                     style={{
                                       maxWidth: '30px',
                                       height: 'auto',
@@ -190,7 +201,7 @@ const MapPins = () => {
                       </Accordion.Item>
                     </Accordion>
                   </Offcanvas.Body>
-                  <Offcanvas.Body>
+                  <Offcanvas.Body className="">
                     { !isValid && (
                       <Form onSubmit={handleSaveComment}>
                         <InputGroup style={{ overflow: 'hidden' }}>
@@ -219,7 +230,7 @@ const MapPins = () => {
                 <Form onSubmit={handleSubmit} encType="multipart/form-data">
                   <Form.Group className="mb-3">
                     {poster && (
-                      <img src={poster} alt="poster" className="img-popup"/>
+                      <img src={poster} alt="poster" className="img-popup mb-3"/>
                     )}
                     <Form.Control type="file" name='images' width="50" height="250" onChange={(e) => onImageUpload(e)} encType=""/>
                   </Form.Group>
