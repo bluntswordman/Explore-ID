@@ -83,19 +83,3 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
-
-// {/* <Form onSubmit={ handleSubmit } className='form-local'>
-//           <Form.Group className="pb-3" controlId="formBasicUsername">
-//             <Form.Control type="text" placeholder="Enter Username" autoComplete='off' className="input-form" value={username} onChange={(e) => setUsername(e.target.value)}/>
-//           </Form.Group>
-//           <Form.Group className="pb-3" controlId="formBasicName">
-//             <Form.Control type="text" placeholder="Enter Name" autoComplete='off' className="input-form" value={name} onChange={(e) => setName(e.target.value)}/>
-//           </Form.Group>
-//           <Form.Group className="pb-3" controlId="formBasicPassword">
-//             <Form.Control type="password" placeholder="Enter Password" className="input-form" value={password} onChange={(e) => setPassword(e.target.value)}/>
-//           </Form.Group>
-//           <Form.Group className="pb-3" controlId="formBasicConfirmPassword">
-//             <Form.Control type="password" placeholder="Confirm Password" className="input-form" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-//           </Form.Group>
-//           <Button type="submit" className="button-form">Daftar</Button>
-//         </Form> */}

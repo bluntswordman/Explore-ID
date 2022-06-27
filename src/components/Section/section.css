@@ -27,7 +27,7 @@
   display: block;
   width: 50px;
   height: 3px;
-  background: #3fbbc0;
+  background: #57bee6;
   bottom: 0;
   left: calc(50% - 25px);
 }
@@ -36,7 +36,6 @@
   margin-bottom: 0;
 }
 
-/* swiper */
 .gallery {
   overflow: hidden;
 }
@@ -83,9 +82,6 @@
   }
 }
 
-/*--------------------------------------------------------------
-# Our Team
---------------------------------------------------------------*/
 .teams .member {
   margin-bottom: 20px;
   overflow: hidden;
@@ -143,4 +139,62 @@
 }
 .teams .member:hover .social {
   opacity: 1;
+}
+
+.contact .info-box {
+  color: #444444;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  padding: 20px 0 30px 0;
+}
+
+.contact .info-box h3 {
+  font-size: 20px;
+  color: #777777;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.contact .info-box p {
+  padding: 0;
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.contact .contact-form {
+  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  padding: 30px;
+}
+
+.contact .contact-form input, .contact .contact-form textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.contact .contact-form input:focus, .contact .contact-form textarea:focus {
+  border-color: #57bee6;
+}
+
+.contact .contact-form input {
+  padding: 10px 15px;
+}
+
+.contact .contact-form textarea {
+  padding: 12px 15px;
+}
+
+.contact .contact-form button[type=submit] {
+  background: #aaaaaa;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+
+.contact .contact-form button[type=submit]:hover {
+  background: #3fbbc0;
 }

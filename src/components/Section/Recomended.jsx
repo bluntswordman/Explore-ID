@@ -79,7 +79,6 @@ const Recomended = () => {
           <div className="gallery-slider swiper">
             <div className="swiper-wrapper align-items-center">
               {content.map((item) => {
-                console.log(item.id);
                 return (
                   <>
                     <div className="swiper-slide">

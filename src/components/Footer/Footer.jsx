@@ -33,7 +33,7 @@ const Footer = () => {
             <div className="row justify-content-center">
               <div className="col-lg-6">
                 <h3><a href="/">Explore ID</a></h3>
-                <p>Explore ID merupakan website untuk mempromosikan wisata lokal, dengan dibuatnya website ini pengembang berharap agar masyarakat setempat atau wisatawan yang datang lebih bisa bekerja sama untuk mempromosikan wisata lokal.</p>
+                <p>Jelajah lebih dalam wisata Indonesia</p>
               </div>
             </div>
             <div className="social-links">

@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
-import { Container, Row, Card, Col, Button, Modal, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { defaultProfile } from '../../assets/core';
 import { Personal } from '../../hooks/users/profile';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import './Profile.css';
 
-const imageProfile = defaultProfile;
-
 const Profile = () => {
   const {name, username} = Personal();
   const [updateName, setUpdateName] = useState('');
   const [updateUsername, setUpdateUsername] = useState('');
   const { userId, token, accessJWT } = GetRefreshToken();
-  const [show, setShow] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,45 +46,82 @@ const Profile = () => {
     }
   };
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   return (
     <>
-      <Container className="my-3">
-        <Card className="mb-3 profile-img shadow">
-          <Row className="g-0 align-items-center">
-            <Col>
-              <img src={imageProfile} className="img-fluid rounded-start p-3" alt={username}/>
-            </Col>
-            <Col className="col-md-8">
-              <Card.Body className="text-start">
-                <Card.Title>{name}</Card.Title>
-                <Card.Text>{username}</Card.Text>
-              </Card.Body>
-              <Card.Body  className="text-end">
-                <Button variant="primary" className='btn-sm' onClick={handleShow}>Edit</Button>
-              </Card.Body>
-            </Col>
-          </Row>
-        </Card>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Data</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Control type="text" placeholder="Name" value={updateName} onChange={(e) => setUpdateName(e.target.value)}/>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Control type="text" placeholder="Username" value={updateUsername} onChange={(e) => setUpdateUsername(e.target.value)}/>
-              </Form.Group>
-              <Button variant="primary" type='submit'>Simpan</Button>
-            </Form>
-          </Modal.Body>
-        </Modal>
-      </Container>
+      <div className="container" style={{marginTop: 90}}>
+        <section className="profile">
+          <div className="row">
+            <div className="col-xl-4">
+              <div className="card">
+                <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                  <img src={defaultProfile} alt="Profile" className="rounded-circle mb-2 pb-2"/>
+                  <h2>{name}</h2>
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-8">
+              <div className="card">
+                <div className="card-body pt-3">
+                  <ul className="nav nav-tabs nav-tabs-bordered">
+                    <li className="nav-item">
+                      <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Data saya</button>
+                    </li>
+                    <li className="nav-item">
+                      <button className="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Ubah data</button>
+                    </li>
+                  </ul>
+                  <div className="tab-content pt-2">
+                    <div className="tab-pane fade show active profile-overview" id="profile-overview">
+                      <h5 className="card-title my-3">Profile Detail</h5>
+                      <div className="row">
+                        <div className="col-lg-3 col-md-4 label ">Nama</div>
+                        <div className="col-lg-9 col-md-8">{name}</div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-3 col-md-4 label ">Username</div>
+                        <div className="col-lg-9 col-md-8">{username}</div>
+                      </div>
+                    </div>
+                    <div className="tab-pane fade profile-edit pt-3" id="profile-edit">
+                      <form onSubmit={handleSubmit}>
+                        <div className="row mb-3">
+                          <label className="col-md-4 col-lg-3 col-form-label" htmlFor='name'>Nama</label>
+                          <div className="col-md-8 col-lg-9">
+                            <input 
+                              name="name" 
+                              type="text" 
+                              className="form-control" 
+                              id="name" 
+                              value={updateName} 
+                              onChange={(e) => setUpdateName(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                        <div className="row mb-3">
+                          <label className="col-md-4 col-lg-3 col-form-label" htmlFor="username">Username</label>
+                          <div className="col-md-8 col-lg-9">
+                            <input 
+                              name="username" 
+                              type="text" 
+                              className="form-control" 
+                              id="username" 
+                              value={updateUsername} 
+                              onChange={(e) => setUpdateUsername(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <button type="submit">Simpan</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </>
   )
 };

@@ -1,3 +1,43 @@
-.profile-img {
-  max-width: 540px;
+.profile .profile-card img {
+  max-width: 120px;
+}
+
+.profile .profile-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c384e;
+  margin: 10px 0 0 0;
+}
+
+.profile .profile-overview .row {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.profile .profile-overview .card-title {
+  color: #3D424A !important;
+}
+
+.profile .profile-overview .label {
+  font-weight: 600;
+  color: #3D424A;
+}
+
+.profile .profile-edit label {
+  font-weight: 600;
+  color: #3D424A;
+}
+
+.profile .profile-edit button {
+  border: none;
+  border-radius: 10px;
+  padding: 8px 15px;
+  transition: all 0.3s ease-in-out;
+
+  background-color: #aaaaaa;
+  color: white;
+}
+
+.profile .profile-edit button:hover {
+  background-color: #57BEE6;
 }

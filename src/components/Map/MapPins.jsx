@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Map, { Marker, NavigationControl, GeolocateControl }from 'react-map-gl';
 import { Offcanvas, Form, Button, Modal, InputGroup, Card, Accordion, Nav } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
+import axios from 'axios';
 import { createLocation, deleteLocation, updateLocation } from '../../hooks/core';
 import createComment from '../../hooks/comment/addComment'
 import { Personal } from '../../hooks/users/profile';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
-import axios from 'axios';
-import { noImage, userProfie, addImage } from '../../assets/core';
+import { noImage, addImage, trueUser, enemyUser } from '../../assets/core';
 import './MapLocation.css';
 
 const mapToken = process.env.REACT_APP_MAPBOX_TOKEN;
@@ -115,13 +115,15 @@ const MapPins = () => {
   const handleShowEdit = () => setShowEdit(true);
   const handleCloseEdit = () => setShowEdit(false);
 
+  console.log(curentUser)
+
   return (
     <>
       <Map
         mapboxAccessToken={mapToken}
         onViewportChange={setViewport}
         initialViewState={viewport}
-        style={{width: '100%', height: '93.8vh'}}
+        style={{width: '100%', height: '91vh', top: 62}}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         onDblClick={handleMapClick}
       >
@@ -163,9 +165,9 @@ const MapPins = () => {
                       <Nav.Link eventKey="disabled" className="text-center overflow-hidden" disabled>"{loc.description}"</Nav.Link>
                     </div>
                     {loc.userId === curentUser && (
-                      <div className="button-popup mt-2">
-                        <Button variant="primary" size="sm" onClick={handleShowEdit}>edit</Button>
-                        <Button variant="danger" size="sm" onClick={handleDelete}>hapus</Button>
+                      <div className="button-popup">
+                        <Button className="btn-updated mx-1" onClick={handleShowEdit}>edit</Button>
+                        <Button className="btn-delete mx-1" onClick={handleDelete}>hapus</Button>
                       </div>
                     )}
                     <Accordion className="mt-1" flush>
@@ -175,20 +177,43 @@ const MapPins = () => {
                           {showComment.comments.length === 0 ? 
                             <h5>Belum ada yang berkomentar</h5> 
                             : 
-                            showComment.comments.map(comment =>
+                            showComment.comments.map(comment => 
                               <Card border="light" style={{ width: '100%' }} className="my-3">
-                                <Card.Header className="d-flex">
-                                  <Card.Img 
-                                    variant="top" 
-                                    src={userProfie} 
-                                    style={{
-                                      maxWidth: '30px',
-                                      height: 'auto',
-                                      marginRight: '10px',
-                                    }}
-                                  />
-                                  <Card.Text className="mt-1">{comment.commentAuthor}</Card.Text>
-                                </Card.Header>
+                                {comment.userId === curentUser ? (
+                                  <>
+                                    <Card.Header 
+                                      className="d-flex flex-row-reverse"
+                                    >
+                                      <Card.Img 
+                                        variant="top" 
+                                        src={trueUser} 
+                                        style={{
+                                          maxWidth: '27px',
+                                          height: 'auto',
+                                          marginLeft: '10px',
+                                        }}
+                                      />
+                                      <Card.Text className="mt-1 fw-bolder">{comment.commentAuthor}</Card.Text>
+                                    </Card.Header>
+                                  </>
+                                  ) : (
+                                  <>
+                                    <Card.Header 
+                                      className="d-flex"
+                                    >
+                                      <Card.Img 
+                                        variant="top" 
+                                        src={enemyUser}
+                                        style={{
+                                          maxWidth: '30px',
+                                          height: 'auto',
+                                          marginRight: '10px',
+                                        }}
+                                      />
+                                      <Card.Text className="mt-1">{comment.commentAuthor}</Card.Text>
+                                    </Card.Header>
+                                  </>
+                                )}
                                 <Card.Body>
                                   <Card.Text>{comment.commentBody}</Card.Text>
                                 </Card.Body>

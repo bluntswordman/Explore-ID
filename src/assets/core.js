@@ -11,9 +11,14 @@ import person4 from './img/Team/profile-team3.jpg';
 
 // Default Profile Users
 import defaultProfile from './img/Profile/default-profile.png';
+import trueUser from './img/Profile/true-user.png';
+import enemyUser from './img/Profile/enemy-user.png';
 
 // Add Image
 import addImage from './img/Location/add-photo.png';
+
+// About Image
+import aboutImage from './img/About/about-us.png'
 
 export {
   imageForm,
@@ -26,4 +31,7 @@ export {
   person4,
   defaultProfile,
   addImage,
+  aboutImage,
+  trueUser,
+  enemyUser
 }

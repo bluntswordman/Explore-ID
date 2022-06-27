@@ -24,7 +24,7 @@ const Hero = () => {
             />
           </a>
           <h1 data-aos="zoom-in">Selamat Datang di <a href='/'>Explore ID</a></h1>
-          <a data-aos="fade-up" data-aos-delay="200" href="/location" target="_blank" className="btn-get-started scrollto">Jelajah</a>
+          <a data-aos="fade-up" data-aos-delay="200" href="/location" className="btn-get-started scrollto">Jelajah</a>
         </div>
       </section>
       <header 

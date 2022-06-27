@@ -14,8 +14,8 @@ const OurTeam = () => {
       <section id="team" className="teams section">
         <div className="container" data-aos="fade-up">
           <div className="section-title">
-          <h2>Tim Pengembang</h2>
-          <p>Kami adalah Team CPSG-65 program Kampus Merdeka Studi Independen Bersertifikat <strong>X</strong> Dicoding</p>
+            <h2>Tim Pengembang</h2>
+            <p>Kami adalah Team CPSG-65 program Kampus Merdeka Studi Independen Bersertifikat <strong>X</strong> Dicoding</p>
           </div>
         <div className="row">
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">

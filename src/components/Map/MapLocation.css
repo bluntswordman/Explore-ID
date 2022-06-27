@@ -9,8 +9,23 @@
 
 .button-popup {
   text-align: end;
+  margin: 1.2em 0;
 }
 
-.button-popup Button {
-  margin: 2px;
+.button-popup .btn-updated, .button-popup .btn-delete {
+  font-size: medium;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 9px;
+  transition: all 0.4s;
+
+  background-color: #aaaaaa;
+}
+
+.button-popup .btn-updated:hover {
+  background-color: #57BEE6;
+}
+
+.button-popup .btn-delete:hover {
+  background-color: #E67F57;
 }
