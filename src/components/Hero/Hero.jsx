@@ -37,7 +37,8 @@ const Hero = () => {
           </div>
           <nav id="navbar" className="navbar">
             <ul>
-              <li><a className="nav-link scrollto active" href="#hero">Home</a></li>
+              <li><a className="nav-link scrollto" href="#hero">Home</a></li>
+              <li><a className="nav-link scrollto" href="/location">Jelajah</a></li>
               <li><a className="nav-link scrollto" href="#rekomendasi">Rekomendasi</a></li>
               <li><a className="nav-link scrollto" href="#team">Team</a></li>
               <li><a className="nav-link scrollto" href="#tentang">Tentang</a></li>
