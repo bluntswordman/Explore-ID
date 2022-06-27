@@ -21,10 +21,7 @@ Explore ID merupakan website untuk mempromosikan wisata lokal, dengan dibuatnya 
     cd Explore-ID
   ```
   ```bash
-    Buat file ".env"
-  ```
-  ```bash
-    Buat REACT_APP_MAPBOX_TOKEN dengan value token yang didapatkan
+    Buat "REACT_APP_MAPBOX_TOKEN" di ".env" dengan value token yang didapatkan
   ```
   ```bash
     yarn || npm || pnpm "install"
