@@ -6,6 +6,7 @@ export const Personal = () => {
   const { userId, token, accessJWT } = GetRefreshToken();
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
+  const [photo, setPhoto] = useState('');
   const [veryfiId, setVeryfiId] = useState('');
 
   useEffect(() => {
@@ -25,6 +26,7 @@ export const Personal = () => {
       const response = await accessJWT.get(`http://localhost:5000/v1/user/${id}`, config);
       setName(response.data.name);
       setUsername(response.data.username);
+      setPhoto(response.data.profile_image);
       setVeryfiId(response.data.id);
     } catch (error) {
       if (error.response.status === 401) {
@@ -33,5 +35,5 @@ export const Personal = () => {
     }
   }
 
-  return { name, username, veryfiId };
+  return { name, username, photo, veryfiId };
 };

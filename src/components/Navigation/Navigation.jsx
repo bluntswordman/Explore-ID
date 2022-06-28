@@ -2,17 +2,17 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 import { useLogOutUser } from '../../hooks/users/logout';
 import { Personal } from '../../hooks/users/profile';
-import { userProfie } from '../../assets/core'
+import { trueUser } from '../../assets/core'
 import './Navigation.css';
 
 const Navigation = () => {
   const {logOutUser} = useLogOutUser();
-  const {name} = Personal();
+  const {name, photo} = Personal();
   const isTrue = !name;
   
   return (
     <>
-      <header id="header" className="header fixed-top d-flex align-items-center">
+      <header id="header" className="header fixed-top d-flex align-items-center bg-secondary">
         <div className="d-flex align-items-center justify-content-between">
           <a href="/" className="logo d-flex align-items-center">
             Explore ID
@@ -46,8 +46,11 @@ const Navigation = () => {
             <>
               <li className="nav-item dropdown pe-3">
                 <a className="nav-link nav-profile d-flex align-items-center pe-0" href="/" data-bs-toggle="dropdown">
-                  <img src={userProfie}  alt="foto Profile" className="rounded-circle"/>
-                  <span className="d-none d-md-block dropdown-toggle ps-2">{name}</span>
+                  <img 
+                    src={photo === 'default.png' ? trueUser : `http://localhost:5000/v1/${photo}`} 
+                    alt="foto Profile" 
+                    className="rounded-circle"/>
+                  <span className="d-none d-md-block dropdown-toggle ps-2 text-light">{name}</span>
                 </a>
                 <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                   <li className="dropdown-header">

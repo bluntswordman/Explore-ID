@@ -1,15 +1,61 @@
 import React, { useState } from 'react';
 import Swal from "sweetalert2";
-import { defaultProfile } from '../../assets/core';
+import { uploadPhoto, trueUser } from '../../assets/core';
 import { Personal } from '../../hooks/users/profile';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import './Profile.css';
 
 const Profile = () => {
-  const {name, username} = Personal();
+  const {name, photo, username} = Personal();
   const [updateName, setUpdateName] = useState('');
   const [updateUsername, setUpdateUsername] = useState('');
+  const [updatePhoto, setUpdatePhoto] = useState('');
+  const [poster, setPoster] = useState(uploadPhoto);
   const { userId, token, accessJWT } = GetRefreshToken();
+
+  const onImageUpload = (e) => {
+    const file = e.target.files[0];
+    setUpdatePhoto(file);
+    try {
+      setPoster(URL.createObjectURL(file));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('images', updatePhoto);
+
+    await accessJWT(`http://localhost:5000/v1/user/updateImage/${userId}`, {
+      method: 'PUT',
+      data: formData,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },})
+      .then((res) => {
+        let timerInterval;
+        Swal.fire({
+          icon: 'success',
+          title: res.data.msg,
+          showConfirmButton: false,
+          timer: 1000,
+          didOpen: () => {
+            Swal.showLoading()
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+            window.location.reload(false);
+          }
+        })
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +100,10 @@ const Profile = () => {
             <div className="col-xl-4">
               <div className="card">
                 <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                  <img src={defaultProfile} alt="Profile" className="rounded-circle mb-2 pb-2"/>
+                  <img 
+                    src={photo === 'default.png' ? trueUser : `http://localhost:5000/v1/${photo}`} 
+                    alt="Profile" 
+                    className="rounded-circle mb-2 pb-2"/>
                   <h2>{name}</h2>
                 </div>
               </div>
@@ -68,6 +117,9 @@ const Profile = () => {
                     </li>
                     <li className="nav-item">
                       <button className="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Ubah data</button>
+                    </li>
+                    <li className="nav-item">
+                      <button className="nav-link" data-bs-toggle="tab" data-bs-target="#foto-edit">Ubah Foto</button>
                     </li>
                   </ul>
                   <div className="tab-content pt-2">
@@ -107,6 +159,32 @@ const Profile = () => {
                               id="username" 
                               value={updateUsername} 
                               onChange={(e) => setUpdateUsername(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <button type="submit">Simpan</button>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="tab-pane fade profile-edit pt-3" id="foto-edit">
+                      <form onSubmit={handleUpdate}>
+                        <div className="text-center">
+                          <img 
+                            src={poster} 
+                            alt="update-rofile" 
+                            className="rounded-circle mb-2 pb-2" 
+                            style={{maxWidth: '100px'}}/>
+                        </div>
+                        <div className="row mb-3">
+                          <label className="col-md-4 col-lg-3 col-form-label" htmlFor='name'>Masukan Foto Anda</label>
+                          <div className="col-md-8 col-lg-9">
+                            <input 
+                              name="photo" 
+                              type="file" 
+                              className="form-control" 
+                              id="photo" 
+                              onChange={(e) => onImageUpload(e)}
                             />
                           </div>
                         </div>

@@ -3,6 +3,7 @@ import Swiper from 'swiper';
 import AOS from 'aos';
 import axios from "axios";
 import { Pagination, Autoplay, Zoom } from "swiper";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'swiper/css';
 import 'aos/dist/aos.css';
 import 'swiper/css/navigation';
@@ -83,7 +84,12 @@ const Recomended = () => {
                   <>
                     <div className="swiper-slide">
                       <div className="swiper-zoom-container" data-swiper-zoom="5">
-                        <img src={`http://localhost:5000/v1/${item.image}`} alt={item.title}/>
+                      <LazyLoadImage
+                        alt={item.title}
+                        effect="blur"
+                        delayTime={1000}
+                        src={`http://localhost:5000/v1/${item.image}`}
+                      />
                       </div>
                       <strong>{item.title}</strong>
                       <p>by '{item.name}'</p>

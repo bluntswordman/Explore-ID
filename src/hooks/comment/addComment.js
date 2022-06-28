@@ -1,5 +1,5 @@
 const createComment = async (comments) => {
-  const { comment, name, userId, id, token, accessJWT } = comments;
+  const { comment, name, photo, userId, id, token, accessJWT } = comments;
 
   let config = {
     headers: {
@@ -11,6 +11,7 @@ const createComment = async (comments) => {
     const response = await accessJWT.post('http://localhost:5000/v1/comment', {
       commentBody: comment,
       commentAuthor: name,
+      commentAuthorPhoto: photo,
       userId: userId,
       locationId: id
     }, config);

@@ -7,8 +7,10 @@ import { createLocation, deleteLocation, updateLocation } from '../../hooks/core
 import createComment from '../../hooks/comment/addComment'
 import { Personal } from '../../hooks/users/profile';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
-import { noImage, addImage, trueUser, enemyUser } from '../../assets/core';
+import { noImage, addImage, trueUser } from '../../assets/core';
 import './MapLocation.css';
+
+import { format } from 'timeago.js'
 
 const mapToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -16,7 +18,7 @@ const MapPins = () => {
   const [viewport, setViewport] = useState({
     latitude: -1.989275,
     longitude: 119.921327,
-    zoom: 3.921327
+    zoom: 4.4
   });
   const [location, setLocation] = useState([]);
   const [curentPlaceId, setCurentPlaceId] = useState(null);
@@ -34,7 +36,7 @@ const MapPins = () => {
   const [comment, setComment] = useState('');
   const [showComment, setShowComment] = useState([]);
 
-  const {name, veryfiId} = Personal();
+  const {name, photo, veryfiId} = Personal();
   const isValid = !name;
   const curentUser = veryfiId;
   const { userId, token, accessJWT } = GetRefreshToken();
@@ -106,7 +108,7 @@ const MapPins = () => {
 
   const handleSaveComment = async (e) => {
     e.preventDefault();
-    const newComment = { comment, name, userId, id, token, accessJWT };
+    const newComment = { comment, name, photo, userId, id, token, accessJWT };
     createComment(newComment);
   }
   
@@ -115,16 +117,14 @@ const MapPins = () => {
   const handleShowEdit = () => setShowEdit(true);
   const handleCloseEdit = () => setShowEdit(false);
 
-  console.log(curentUser)
-
   return (
     <>
       <Map
         mapboxAccessToken={mapToken}
         onViewportChange={setViewport}
         initialViewState={viewport}
-        style={{width: '100%', height: '91vh', top: 62}}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
+        style={{width: '100%', height: '91.4vh', top: 60}}
+        mapStyle="mapbox://styles/mapbox/dark-v10"
         onDblClick={handleMapClick}
       >
         <NavigationControl/>
@@ -137,7 +137,7 @@ const MapPins = () => {
               {loc.userId === curentUser ? (
                 <Icon 
                   icon="ri:map-pin-user-fill" 
-                  color="#0F4334"
+                  color="#57BEE6"
                   height="30" 
                   cursor="pointer"
                   onClick={() => handleMarkerClick(loc.id)}
@@ -145,7 +145,7 @@ const MapPins = () => {
               ) : (
                 <Icon 
                   icon="tabler:map-pin" 
-                  color="#0F4334" 
+                  color="#E67F57" 
                   height="30"
                   cursor="pointer"
                   onClick={() => handleMarkerClick(loc.id)}
@@ -179,46 +179,28 @@ const MapPins = () => {
                             : 
                             showComment.comments.map(comment => 
                               <Card border="light" style={{ width: '100%' }} className="my-3">
-                                {comment.userId === curentUser ? (
-                                  <>
-                                    <Card.Header 
-                                      className="d-flex flex-row-reverse"
-                                    >
-                                      <Card.Img 
-                                        variant="top" 
-                                        src={trueUser} 
-                                        style={{
-                                          maxWidth: '27px',
-                                          height: 'auto',
-                                          marginLeft: '10px',
-                                        }}
-                                      />
-                                      <Card.Text className="mt-1 fw-bolder">{comment.commentAuthor}</Card.Text>
-                                    </Card.Header>
-                                  </>
-                                  ) : (
-                                  <>
-                                    <Card.Header 
-                                      className="d-flex"
-                                    >
-                                      <Card.Img 
-                                        variant="top" 
-                                        src={enemyUser}
-                                        style={{
-                                          maxWidth: '30px',
-                                          height: 'auto',
-                                          marginRight: '10px',
-                                        }}
-                                      />
-                                      <Card.Text className="mt-1">{comment.commentAuthor}</Card.Text>
-                                    </Card.Header>
-                                  </>
-                                )}
-                                <Card.Body>
+                                <Card.Header 
+                                  className={comment.userId === curentUser ? "d-flex flex-row-reverse" : "d-flex"}
+                                >
+                                  <Card.Img 
+                                    variant="top" 
+                                    className="rounded-circle shadow border border-2"
+                                    src={comment.commentAuthorPhoto === 'default.png' ? trueUser : `http://localhost:5000/v1/${comment.commentAuthorPhoto}`}
+                                    style={comment.userId === curentUser ? {maxWidth: '27px', height: 'auto', marginLeft: '10px'} : {maxWidth: '27px', height: 'auto', marginRight: '10px'}}
+                                  />
+                                  <Card.Text className="mt-1 fw-bolder">{comment.commentAuthor}</Card.Text>
+                                </Card.Header>
+                                <Card.Body
+                                  className={comment.userId === curentUser ? "d-flex flex-row-reverse" : "d-flex"}
+                                >
                                   <Card.Text>{comment.commentBody}</Card.Text>
                                 </Card.Body>
-                                <Card.Footer>
-                                  <Nav.Link eventKey="disabled" className="text-muted fs-6" disabled>Last updated 3 mins ago</Nav.Link>
+                                <Card.Footer
+                                  className={comment.userId === curentUser ? "d-flex flex-row-reverse" : "d-flex"}
+                                >
+                                  <Nav.Link eventKey="disabled" className="text-muted fs-6" disabled>
+                                    {format(comment.createdAt)}
+                                  </Nav.Link>
                                 </Card.Footer>
                               </Card>
                             )}
