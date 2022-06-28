@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import axios from 'axios';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import './index.css';
 import App from './App';
-import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
@@ -12,4 +13,7 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+serviceWorkerRegistration.register();
+
 
