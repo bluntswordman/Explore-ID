@@ -124,7 +124,7 @@ const MapPins = () => {
         onViewportChange={setViewport}
         initialViewState={viewport}
         style={{width: '100%', height: '91.4vh', top: 60}}
-        mapStyle="mapbox://styles/mapbox/dark-v10"
+        mapStyle="mapbox://styles/mapbox/streets-v11"
         onDblClick={handleMapClick}
       >
         <NavigationControl/>
