@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import './content.css';
@@ -16,7 +17,7 @@ const Content = () => {
       }
     };
     myContent();
-  }, [userId,accessJWT]);
+  }, [accessJWT]);
 
   return (
     <>
@@ -27,7 +28,7 @@ const Content = () => {
             {showContent === [] || showContent === null ? console.log('no content') : showContent.map((item) => (
               <div className="col">
                 <div className="card">
-                  <img src={`http://localhost:5000/v1/${item.image}`} className="card-img-top" alt={item.title}/>
+                  <img src={`http://localhost:5000/v1/${item.image}`} className="card-img-top img-content" alt={item.title}/>
                   <div className="card-body">
                     <h5 className="card-title fw-bolder">{item.title}</h5>
                     <p className="card-text text">{item.description}</p>

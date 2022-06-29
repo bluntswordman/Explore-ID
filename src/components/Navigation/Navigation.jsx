@@ -12,7 +12,7 @@ const Navigation = () => {
   
   return (
     <>
-      <header id="header" className="header fixed-top d-flex align-items-center bg-secondary">
+      <header id="header" className="header fixed-top d-flex align-items-center">
         <div className="d-flex align-items-center justify-content-between">
           <a href="/" className="logo d-flex align-items-center">
             Explore ID

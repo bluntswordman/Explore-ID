@@ -137,7 +137,7 @@ const MapPins = () => {
               {loc.userId === curentUser ? (
                 <Icon 
                   icon="ri:map-pin-user-fill" 
-                  color="#57BEE6"
+                  color="#3D424A"
                   height="30" 
                   cursor="pointer"
                   onClick={() => handleMarkerClick(loc.id)}

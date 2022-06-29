@@ -1,5 +1,9 @@
-.text {
+.dashboard .text {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.dashboard .img-content {
+  max-height: 47vh !important;
 }

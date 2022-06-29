@@ -16,7 +16,6 @@ const About = () => {
                 alt="foto tentang kami"
                 className="img-fluid"
                 effect="blur"
-                delayTime={300}
                 src={aboutImage}
               />
             </div>

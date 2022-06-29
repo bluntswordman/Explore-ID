@@ -11,9 +11,7 @@ export const Personal = () => {
 
   useEffect(() => {
     getProfile(userId);
-  });
-
-  
+  },);
   
   const getProfile = async (id) => {
     let config = {

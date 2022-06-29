@@ -7,6 +7,37 @@
 ## Tentang Aplikasi ##
 Explore ID merupakan website untuk mempromosikan wisata lokal, dengan dibuatnya website ini pengembang berharap agar masyarakat setempat atau wisatawan yang datang lebih bisa bekerja sama untuk mempromosikan wisata lokal.
 
+## Tentang Aplikasi ##
+#### Landing Page ####
+<div align="left">
+  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+    <img src="https://drive.google.com/uc?id=1hi3gzXcIcE4mNM-OuLx41AYV-Lh0uZ1S" alt="landing-1">
+  </a>
+  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+    <img src="https://drive.google.com/uc?id=1vo0XYcx_eGC82uynU_OW1uSbYaK8r6il" alt="landing-2">
+  </a>
+  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+    <img src="https://drive.google.com/uc?id=1c8odpLHQF-mYbp2ZXr4CO-BRww7mgkbt" alt="landing-3">
+  </a>
+  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+    <img src="https://drive.google.com/uc?id=138MqJez9tNuknplrR5NBKu-39K97thrZ" alt="landing-4">
+  </a>
+</div>
+
+#### Dashboard ####
+<div align="left">
+  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+    <img src="https://drive.google.com/uc?id=1D0KTA_RsYy-4VFYTonP2dL1oHMDeEcPA" alt="dashboard">
+  </a>
+</div>
+
+#### Map Location ####
+<div align="left">
+  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+    <img src="https://drive.google.com/uc?id=1-SqFoO8r8rWrG7_wEsvlTRLv_pyaPafD" alt="location">
+  </a>
+</div>
+
 ## Instalasi & Mejalankan Program ##
 *Repository <a href="https://github.com/bluntswordman/server-ExploreID">**Server**</a>* 
 #### Persiapan ####
