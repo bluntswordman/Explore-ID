@@ -4,56 +4,56 @@
   </a>
 </div>
 
-## Tentang Aplikasi ##
+## About Application ##
 Explore ID merupakan website untuk mempromosikan wisata lokal, dengan dibuatnya website ini pengembang berharap agar masyarakat setempat atau wisatawan yang datang lebih bisa bekerja sama untuk mempromosikan wisata lokal.
 
-## Tentang Aplikasi ##
+## User Interface Application ##
 #### Landing Page ####
 <div align="left">
-  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+  <a href="https://drive.google.com/uc?id=1hi3gzXcIcE4mNM-OuLx41AYV-Lh0uZ1S" target="blank" rel="noreferrer">
     <img src="https://drive.google.com/uc?id=1hi3gzXcIcE4mNM-OuLx41AYV-Lh0uZ1S" alt="landing-1">
   </a>
-  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+  <a href="https://drive.google.com/uc?id=1vo0XYcx_eGC82uynU_OW1uSbYaK8r6il" target="blank" rel="noreferrer">
     <img src="https://drive.google.com/uc?id=1vo0XYcx_eGC82uynU_OW1uSbYaK8r6il" alt="landing-2">
   </a>
-  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+  <a href="https://drive.google.com/uc?id=1c8odpLHQF-mYbp2ZXr4CO-BRww7mgkbt" target="blank" rel="noreferrer">
     <img src="https://drive.google.com/uc?id=1c8odpLHQF-mYbp2ZXr4CO-BRww7mgkbt" alt="landing-3">
   </a>
-  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+  <a href="https://drive.google.com/uc?id=138MqJez9tNuknplrR5NBKu-39K97thrZ" target="blank" rel="noreferrer">
     <img src="https://drive.google.com/uc?id=138MqJez9tNuknplrR5NBKu-39K97thrZ" alt="landing-4">
   </a>
 </div>
 
 #### Dashboard ####
 <div align="left">
-  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+  <a href="https://drive.google.com/uc?id=1D0KTA_RsYy-4VFYTonP2dL1oHMDeEcPA" target="blank" rel="noreferrer">
     <img src="https://drive.google.com/uc?id=1D0KTA_RsYy-4VFYTonP2dL1oHMDeEcPA" alt="dashboard">
   </a>
 </div>
 
 #### Map Location ####
 <div align="left">
-  <a href="https://github.com/bluntswordman/Explore-ID" target="blank" rel="noreferrer">
+  <a href="https://drive.google.com/uc?id=1-SqFoO8r8rWrG7_wEsvlTRLv_pyaPafD" target="blank" rel="noreferrer">
     <img src="https://drive.google.com/uc?id=1-SqFoO8r8rWrG7_wEsvlTRLv_pyaPafD" alt="location">
   </a>
 </div>
 
-## Instalasi & Mejalankan Program ##
+## Install & Running Application ##
 *Repository <a href="https://github.com/bluntswordman/server-ExploreID">**Server**</a>* 
-#### Persiapan ####
+#### Prerequisite ####
   ```bash
-    Buat akun dan dapatkan Token di "https://www.mapbox.com/" 
+    Create account and earn Tokens on "https://www.mapbox.com/" 
   ```
 #### Clone Repository ####
   ```bash
     git clone "https://github.com/bluntswordman/Explore-ID.git"
   ```
-#### Mejalankan Program ####
+#### Running Application ####
   ```bash
     cd Explore-ID
   ```
   ```bash
-    Buat "REACT_APP_MAPBOX_TOKEN" di ".env" dengan value token yang didapatkan
+    in root folder create ".env" & add "REACT_APP_MAPBOX_TOKEN" with the value of the token you got
   ```
   ```bash
     yarn || npm || pnpm "install"
@@ -61,6 +61,7 @@ Explore ID merupakan website untuk mempromosikan wisata lokal, dengan dibuatnya 
   ```bash
     yarn || npm || pnpm "start"
   ```
+  *note : before running client application first run the <a href="https://github.com/bluntswordman/server-ExploreID">**server**</a> application*
 ## Technology ##
 | Base | Library & Framework | API Services | Tools | 
 |------------|-------------|-------------|-------------|
