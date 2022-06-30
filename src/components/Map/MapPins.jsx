@@ -10,7 +10,7 @@ import { GetRefreshToken } from "../../hooks/token/refreshToken";
 import { noImage, addImage, trueUser } from '../../assets/core';
 import './MapLocation.css';
 
-import { format } from 'timeago.js'
+// import { format } from 'timeago.js'
 
 const mapToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -195,13 +195,13 @@ const MapPins = () => {
                                 >
                                   <Card.Text>{comment.commentBody}</Card.Text>
                                 </Card.Body>
-                                <Card.Footer
+                                {/* <Card.Footer
                                   className={comment.userId === curentUser ? "d-flex flex-row-reverse" : "d-flex"}
                                 >
                                   <Nav.Link eventKey="disabled" className="text-muted fs-6" disabled>
                                     {format(comment.createdAt)}
                                   </Nav.Link>
-                                </Card.Footer>
+                                </Card.Footer> */}
                               </Card>
                             )}
                         </Accordion.Body>

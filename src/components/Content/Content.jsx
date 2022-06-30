@@ -17,7 +17,7 @@ const Content = () => {
       }
     };
     myContent();
-  }, [accessJWT]);
+  }, [userId,accessJWT]);
 
   return (
     <>
