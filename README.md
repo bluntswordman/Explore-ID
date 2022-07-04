@@ -73,4 +73,4 @@ Explore ID merupakan website untuk mempromosikan wisata lokal, dengan dibuatnya 
 + <a href="https://github.com/nolimits4web/swiper" target="blank" rel="noreferrer">swiper</a>
 
 ## Project Brief ##
-<a href="https://bit.ly/Project-Brief-CPSG-65r" target="blank" rel="noreferrer">Link</a>
+<a href="https://drive.google.com/file/d/1SreYGDRSCP_t9JGS6MLj-7WOKgDC5VUR/view" target="blank" rel="noreferrer">Link</a>
