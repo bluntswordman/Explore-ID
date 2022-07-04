@@ -71,3 +71,5 @@ Explore ID merupakan website untuk mempromosikan wisata lokal, dengan dibuatnya 
 + <a href="https://github.com/axios/axios" target="blank" rel="noreferrer">axios</a>
 + <a href="https://github.com/sweetalert2/sweetalert2" target="blank" rel="noreferrer">sweetalert2</a>
 + <a href="https://github.com/nolimits4web/swiper" target="blank" rel="noreferrer">swiper</a>
+
+<a href="https://bit.ly/Project-Brief-CPSG-65r" target="blank" rel="noreferrer">Project Brief</a>
